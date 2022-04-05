@@ -5,7 +5,7 @@ const PostListContainer = styled.div`
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-    /* border: 5px solid lightgreen; */
+    border: 5px solid lightgreen;
     background-color: var(--primary-color);
 
     & > * {

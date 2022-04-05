@@ -4,12 +4,16 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { resetDropdown } from '../features/classDropdownToggle/classDropdownToggleSlice';
 import { selectJoinedClasses, updateCurrentClass } from '../features/classes/classSlice';
+import { hideMoreMenu } from '../features/sidebar/sidebarSlice';
+import { ClassNavDropdownContainer } from './styled/Navbar.styled';
+
 
 function ClassNavDropdown({ className }) {
     const joinedClasses = useSelector(selectJoinedClasses);
     const dispatch = useDispatch();
 
     const handleClick = (cls) => {
+        dispatch(hideMoreMenu());
         dispatch(resetDropdown());
         dispatch(updateCurrentClass(cls));
     };
@@ -28,11 +32,5 @@ function ClassNavDropdown({ className }) {
         </ClassNavDropdownContainer>
     )
 }
-
-const ClassNavDropdownContainer = styled.div`
-    height: 200px;
-    width: 200px;
-    overflow-y: auto;
-`
 
 export default ClassNavDropdown;

@@ -8,7 +8,12 @@ import {
     ButtonGroup,
     NavList,
     NavItem,
-    NavigationLink
+    NavigationLink,
+    MoreSection,
+    MoreVertIcon,
+    CloseIcon,
+    NavClassContainer,
+    LogoutBtn
 } from '../components/styled/Navbar.styled';
 import { logout, reset, selectUser, selectUserStatus } from '../features/user/userSlice';
 import ClassNavDropdown from './ClassNavDropdown';
@@ -16,9 +21,13 @@ import { resetDropdown, selectShowDropdown, toggleDropdown } from '../features/c
 import { resetMainContent, toggleContent } from '../features/mainContentToggle/mainContentToggleSlice';
 import { resetClasses, selectCurrentClass, selectJoinedClasses } from '../features/classes/classSlice';
 import { resetPosts } from '../features/posts/postSlice';
+import { hideMoreMenu, hideSidebar, selectMoreMenuStatus, showMoreMenu, toggleMore } from '../features/sidebar/sidebarSlice';
+// import MoreVertIcon from '@mui/icons-material/MoreVert';
+// import CloseIcon from '@mui/icons-material/Close';
 
 
 function Navbar() {
+    const showMore = useSelector(selectMoreMenuStatus);
     const user = useSelector(selectUser);
     const joinedClasses = useSelector(selectJoinedClasses);
     const currentClass = useSelector(selectCurrentClass);
@@ -28,6 +37,25 @@ function Navbar() {
     const showClassDropdown = useSelector(selectShowDropdown);
     const [storeResetDone, setStoreResetDone] = useState(false);
     const canManageClass = currentClass?.instructors_list?.includes(user.email);
+
+    // check if screen is mobile
+    const [isMobile, setIsMobile] = useState(false)
+
+    //choose the screen size 
+    const handleResize = () => {
+        if (window.innerWidth < 720) {
+            setIsMobile(true)
+        } else {
+            setIsMobile(false)
+        }
+    }
+
+    // create an event listener
+    useEffect(() => {
+        window.addEventListener("resize", handleResize);
+    });
+
+    // finally you can render components conditionally if isMobile is True or False 
 
     useEffect(() => {
         if (isError) {
@@ -52,10 +80,12 @@ function Navbar() {
     const handleNavTabClick = () => {
         dispatch(toggleContent('other'));
         dispatch(resetDropdown());
+        dispatch(hideMoreMenu());
     }
 
     const handleLogout = async () => {
         localStorage.removeItem('currentClass');
+        dispatch(hideMoreMenu());
         dispatch(resetPosts());
         dispatch(resetDropdown());
         dispatch(resetMainContent());
@@ -64,93 +94,173 @@ function Navbar() {
         dispatch(logout());
     }
 
+
     return (
-        <NavbarContainer>
+        <NavbarContainer
+            className={showMore ? "make-z-index-big" : ""}
+        >
             <LogoSection>
 
                 <NavigationLink
-                    onClick={() => { dispatch(resetDropdown()); }}
+                    onClick={() => {
+                        dispatch(resetDropdown());
+                        dispatch(hideMoreMenu());
+                    }}
                     className='logo'
                     to="/"
                 >
-                    Logo
+                    AnswerBoard
                 </NavigationLink>
-                <ButtonGroup>
+                {(!showMore) ?
+                    <MoreVertIcon
+                        onClick={() => {
+                            dispatch(toggleMore());
+                            dispatch(hideSidebar());
+                            dispatch(resetDropdown());
+                        }}
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                    >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                    </MoreVertIcon>
+                    :
+                    <CloseIcon
+                        onClick={() => {
+                            dispatch(toggleMore());
+                            dispatch(hideSidebar());
+                            dispatch(resetDropdown());
+                        }}
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                    >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </CloseIcon>
+                }
 
-
-                    {
-                        user.role === "instructor"
-                        &&
+                {
+                    !isMobile
+                    &&
+                    <ButtonGroup>
+                        {
+                            user.role === "instructor"
+                            &&
+                            <button
+                                onClick={() => {
+                                    dispatch(toggleContent('create-class'));
+                                    dispatch(hideMoreMenu());
+                                    dispatch(resetDropdown());
+                                }}
+                            >
+                                New Class
+                            </button>
+                        }
                         <button
                             onClick={() => {
-                                dispatch(toggleContent('create-class'));
+                                dispatch(toggleContent('join-class'));
+                                dispatch(hideMoreMenu());
                                 dispatch(resetDropdown());
                             }}
                         >
-                            New Class
+                            Join Class
                         </button>
-                    }
-                    <button
-                        onClick={() => {
-                            dispatch(toggleContent('join-class'));
-                            dispatch(resetDropdown());
-                        }}
-                    >
-                        Join Class
-                    </button>
-                </ButtonGroup>
+                    </ButtonGroup>
+                }
+
             </LogoSection>
 
-            <NavList>
-                <NavItem
-                    onClick={() => {
-                        dispatch(toggleDropdown());
-                    }}
-                >
-                    My Classes
-                </NavItem>
-
-                {showClassDropdown && <ClassNavDropdown />}
-
+            <MoreSection
+                id='more-menu'
+                className={(showMore) ? "more-menu-is-open" : ""}
+            >
+                {/* render only if device is mobile */}
                 {
-                    joinedClasses.length !== 0
+                    isMobile
                     &&
-                    currentClass != undefined
-                    &&
-                    currentClass !== null
-                    &&
-                    (
-                        <>
-                            <NavItem>
-                                <NavigationLink
-                                    onClick={handleNavTabClick} to={`resources`}
-                                >
-                                    Resources
-                                </NavigationLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavigationLink
-                                    onClick={handleNavTabClick} to={`statistics`}
-                                >
-                                    Statistics
-                                </NavigationLink>
-                            </NavItem>
-                            {
-                                canManageClass
-                                &&
+                    <ButtonGroup>
+                        {
+                            user.role === "instructor"
+                            &&
+                            <button
+                                onClick={() => {
+                                    dispatch(toggleContent('create-class'));
+                                    dispatch(hideMoreMenu());
+                                    dispatch(resetDropdown());
+                                }}
+                            >
+                                New Class
+                            </button>
+                        }
+                        <button
+                            onClick={() => {
+                                dispatch(toggleContent('join-class'));
+                                dispatch(hideMoreMenu());
+                                dispatch(resetDropdown());
+                            }}
+                        >
+                            Join Class
+                        </button>
+                    </ButtonGroup>
+                }
+                <NavList>
+                    <NavClassContainer>
+
+                        <NavItem
+                            onClick={() => {
+                                dispatch(toggleDropdown());
+                            }}
+                        >
+                            My Classes
+                        </NavItem>
+
+                        {showClassDropdown && <ClassNavDropdown />}
+                    </NavClassContainer>
+
+                    {
+                        joinedClasses.length !== 0
+                        &&
+                        currentClass != undefined
+                        &&
+                        currentClass !== null
+                        &&
+                        (
+                            <>
                                 <NavItem>
                                     <NavigationLink
-                                        onClick={handleNavTabClick} to={`manage-class`}
+                                        onClick={handleNavTabClick} to={`resources`}
                                     >
-                                        Manage Class
+                                        Resources
                                     </NavigationLink>
                                 </NavItem>
-                            }
-                        </>
-                    )
-                }
-            </NavList>
-            <button onClick={handleLogout}>Logout</button>
+                                <NavItem>
+                                    <NavigationLink
+                                        onClick={handleNavTabClick} to={`statistics`}
+                                    >
+                                        Statistics
+                                    </NavigationLink>
+                                </NavItem>
+                                {
+                                    canManageClass
+                                    &&
+                                    <NavItem>
+                                        <NavigationLink
+                                            onClick={handleNavTabClick} to={`manage-class`}
+                                        >
+                                            Manage Class
+                                        </NavigationLink>
+                                    </NavItem>
+                                }
+                            </>
+                        )
+                    }
+                </NavList>
+                <LogoutBtn onClick={handleLogout}>Logout</LogoutBtn>
+            </MoreSection>
         </NavbarContainer>
     );
 }

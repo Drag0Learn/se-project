@@ -8,7 +8,7 @@ import { updateCurrentDiscussion } from '../features/posts/postSlice';
 
 const DiscussionListContainer = styled.div`
     background-color: var(--primary-color);
-    /* border: 5px solid orange; */
+    border: 5px solid orange;
     width: 100%;
     height: var(--navbar-height);
     display: flex;
@@ -32,7 +32,6 @@ function DiscussionList() {
         dispatch(updateCurrentDiscussion(discussion));
         dispatch(resetDropdown());
         dispatch(toggleContent('other'));
-        console.log(discussion);
     }
 
     return (

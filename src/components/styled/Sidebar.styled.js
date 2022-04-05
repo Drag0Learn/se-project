@@ -1,5 +1,7 @@
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { media, mediaScreenSize } from '../../common/helpers/mediaQuery';
+
 
 const SidebarContainer = styled.div`
     height: 100%;
@@ -7,7 +9,7 @@ const SidebarContainer = styled.div`
     flex-direction: column;
     overflow-y: auto;
     position: relative;
-    /* border: 10px solid var(--secondary-color); */
+    border: 5px solid var(--secondary-color);
     
     ${media.mobile} {
         position: fixed;
@@ -42,15 +44,15 @@ const OpenMenuIcon = styled.svg`
     left: 0;
     width: 2em;
     cursor: pointer;
-    z-index: 99999;
+    z-index: 9999;
     
     &:hover {
-        color: var(--secondary-color);
+        color: var(--dark-secondary-color);
     }
 `
 
 const CloseMenuIcon = styled(OpenMenuIcon)`
-
+    z-index: 99999;
 `
 
 export { SidebarContainer, OpenMenuIcon, CloseMenuIcon };

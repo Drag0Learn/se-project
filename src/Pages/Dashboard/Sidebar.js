@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import DashboardSearch from '../../components/DashboardSearch';
 import PostsList from '../../components/PostsList';
 import { SidebarContainer, OpenMenuIcon, CloseMenuIcon } from '../../components/styled/Sidebar.styled';
-import { selectSidebarStatus, toggleSidebar } from '../../features/sidebar/sidebarSlice';
+import { hideMoreMenu, selectMoreMenuStatus, selectSidebarStatus, toggleSidebar } from '../../features/sidebar/sidebarSlice';
 
 function Sidebar() {
+    const showMore = useSelector(selectMoreMenuStatus);
     const showSidebar = useSelector(selectSidebarStatus);
     const dispatch = useDispatch();
     const [searchTerm, setSearchTerm] = useState('');
@@ -14,7 +15,10 @@ function Sidebar() {
         <>
             {(!showSidebar) ?
                 <OpenMenuIcon
-                    onClick={() => dispatch(toggleSidebar())}
+                    onClick={() => {
+                        dispatch(toggleSidebar());
+                        dispatch(hideMoreMenu());
+                    }}
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none" viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -24,7 +28,10 @@ function Sidebar() {
                 </OpenMenuIcon>
                 :
                 <CloseMenuIcon
-                    onClick={() => dispatch(toggleSidebar())}
+                    onClick={() => {
+                        dispatch(toggleSidebar());
+                        dispatch(hideMoreMenu());
+                    }}
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
