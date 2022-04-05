@@ -39,7 +39,7 @@ function Navbar() {
     const canManageClass = currentClass?.instructors_list?.includes(user.email);
 
     // check if screen is mobile
-    const [isMobile, setIsMobile] = useState(false)
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 720)
 
     //choose the screen size 
     const handleResize = () => {

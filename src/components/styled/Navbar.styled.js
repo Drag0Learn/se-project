@@ -4,6 +4,7 @@ import { media, mediaScreenSize } from '../../common/helpers/mediaQuery';
 
 
 const NavbarContainer = styled.div`
+    height: var(--navbar-height);
     position: sticky;
     top: 0;
     background-color: var(--primary-color);
@@ -21,8 +22,10 @@ const NavbarContainer = styled.div`
 `
 
 const LogoSection = styled.div`
+    height: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     border: 5px solid red;
     
     ${media.desktop} {
@@ -33,6 +36,7 @@ const LogoSection = styled.div`
 const MoreSection = styled.div`
     border: 5px solid var(--secondary-color);
     position: relative;
+    height: 100%;
     
     ${media.mobile} {
         display: none;
@@ -66,13 +70,14 @@ const MoreSection = styled.div`
 `
 
 const NavList = styled.ul`
+    border: 5px solid lightgreen;
     list-style: none;
     display: flex;
+    align-items: center;
 
     ${media.mobile} {
         flex-direction: column;
         justify-content: center;
-        align-items: center;
     }
 
     ${media.desktop} {
@@ -84,10 +89,13 @@ const NavList = styled.ul`
 
 const ButtonGroup = styled.div`
     display: flex;
+    border: 5px solid black;
     
     ${media.mobile} {
         flex: 0.15;
+        height: var(--navbar-height);
         flex-direction: column;
+        justify-content: center;
     }
 `
 
@@ -117,7 +125,7 @@ const ClassNavDropdownContainer = styled.div`
     ${media.desktop} {
         position: absolute;
         border-radius: 1em;
-        top: 30px;
+        top: var(--navbar-height);
         width: 200px;
         height: 200px;
     }

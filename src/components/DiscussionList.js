@@ -12,6 +12,7 @@ const DiscussionListContainer = styled.div`
     width: 100%;
     height: var(--navbar-height);
     display: flex;
+    align-items: center;
     gap: 1em;
     overflow-x: scroll;
     overflow-y: hidden;
