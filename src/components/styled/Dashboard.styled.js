@@ -25,6 +25,10 @@ const PostAndContentWrapper = styled.div`
     ${media.mobile} {
         flex-direction: column;
     }
+
+    ${media.desktop} {
+        gap: var(--post-card-margin);
+    }
 `
 
 export { DashboardMainWrapper, PostAndContentWrapper };

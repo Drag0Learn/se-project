@@ -5,7 +5,7 @@ const PostListContainer = styled.div`
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-    border: 5px solid lightgreen;
+    /* border: 5px solid lightgreen; */
     background-color: var(--primary-color);
 
     & > * {
@@ -21,12 +21,41 @@ const PostListContainer = styled.div`
 const StyledPostCard = styled.div`
     background-color: var(--gray-color);
     margin: var(--post-card-margin);
-    padding: var(--post-card-padding);
+    padding-block: calc(var(--post-card-padding) / 2);
+    padding-inline: var(--post-card-padding);
     border-radius: var(--div-border-radius);
     ${(props) => (props.color) ? "background-color: var(--white-color);" : ""}
+    position: relative;
+    z-index: 0;
+    
+    & .inner-post-card {
+        overflow: hidden;
+        height: calc(var(--post-card-size) - 1.7em);
+        max-width: 100%;
+        display: inline-block;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
 
     &:hover {
         background-color: var(--white-color);
+    }
+
+    &.active-post {
+        background-color: var(--white-color);
+    }
+
+    &.active-post::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: calc(var(--post-card-margin) / 2);
+        height: var(--post-card-size);
+        border-top-left-radius: var(--div-border-radius);
+        border-bottom-left-radius: var(--div-border-radius);
+        background-color: var(--secondary-color);
+        z-index: 99999;
     }
 `
 

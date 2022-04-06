@@ -6,7 +6,7 @@ const ContentAreaWrapper = styled.div`
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-    border: 5px solid red;
+    /* border: 5px solid red; */
     background-color: var(--white-color);
     /* border-bottom: 0.75em solid var(--primary-color); */
 

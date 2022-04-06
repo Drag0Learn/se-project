@@ -21,7 +21,7 @@ const GlobalStyles = createGlobalStyle`
 
         --post-card-size: 10vh;
         --post-card-margin: 0.75em;
-        --post-card-padding: 0.5em;
+        --post-card-padding: 1.5em;
 
         --div-margin: 0.75em;
         --div-padding: 0.75em;

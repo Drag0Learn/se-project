@@ -35,15 +35,15 @@ function DashboardSearch({ searchTerm, setSearchTerm }) {
     return (
         <SearchBarContainer>
             <SearchBox>
+                <SearchIcon xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </SearchIcon>
                 <SearchInput
                     type=""
                     placeholder="Search"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
-                <SearchIcon xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </SearchIcon>
             </SearchBox>
             <div className="add-post-btn">
                 <AddPostButton disabled={noCurrentClassAvailable} onClick={handleClick}>New Post</AddPostButton>

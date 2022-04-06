@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { media } from '../../common/helpers/mediaQuery';
 
 const SearchBarContainer = styled.div`
-    border: 5px solid black;
+    /* border: 5px solid black; */
     height: calc(2 * var(--navbar-height));
     background-color: var(--primary-color);
     padding: var(--post-card-margin);
@@ -11,6 +11,7 @@ const SearchBarContainer = styled.div`
     gap: var(--post-card-margin);
     
     ${media.mobile} {
+        margin-top: calc((var(--post-card-margin) * 2) + var(--navbar-height) / 2);
         flex-direction: column;
     }
 
@@ -45,14 +46,13 @@ const SearchBox = styled.div`
 `
 
 const SearchInput = styled.input`
-    position: absolute;
     width: 100%;
     height: 100%;
     font-family: inherit;
     border: 0.1rem solid var(--input-color);
     border-radius: calc(2 * var(--div-border-radius));
     outline: none;
-    padding-left: calc(6 * var(--post-card-padding));
+    padding-left: calc(2 * var(--post-card-padding));
     background-color: var(--white-color);
 
     &:hover,
@@ -74,27 +74,31 @@ const SearchIcon = styled.svg`
 
 const AddPostButton = styled.button`
     font-family: inherit;
-    font-size: var(--small-font-size);
+    font-weight: var(--fw-bold);
     width: 100%;
     height: 100%;
     cursor: pointer;
     outline: none;
     border: none;
     border-radius: var(--div-border-radius);
-    padding: var(--post-card-padding);
+    padding: calc(var(--post-card-padding) / 2);
     background-color: var(--secondary-color);
     color: var(--white-color);
 
     
-    max-width:90%;
-    display:inline-block;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
+    max-width: 100%;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     &:hover {
         background-color: var(--dark-secondary-color);
     }
+
+    /* ${media.mobile} {
+        margin-top: var(--post-card-margin);
+    } */
 `
 
 export {

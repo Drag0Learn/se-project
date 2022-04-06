@@ -9,19 +9,20 @@ const SidebarContainer = styled.div`
     flex-direction: column;
     overflow-y: auto;
     position: relative;
-    border: 5px solid var(--secondary-color);
+    /* border: 5px solid var(--secondary-color); */
     
     ${media.mobile} {
         position: fixed;
         inset: 0 30% 0 0;
         z-index: 9999;
-        background-color: white;
+        background-color: var(--primary-color);
         width: min(75vw, ${mediaScreenSize.mobileSmallMax});
         border-right: 5px solid var(--gray-color);
         
 
         ${media.mobileSmall} {
             width: 100vw;
+            border-right: none;
         }
 
         &.sidebar-is-closed {
@@ -40,9 +41,9 @@ const OpenMenuIcon = styled.svg`
     }
 
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 2em;
+    top: calc((var(--navbar-height) - calc(var(--post-card-margin) * 2.3)) / 2.3);
+    left: var(--post-card-margin);
+    width: calc(var(--post-card-margin) * 2.3);
     cursor: pointer;
     z-index: 9999;
     

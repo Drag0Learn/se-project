@@ -19,6 +19,7 @@ function PostsList({ searchTerm }) {
     const { c_id } = useParams();
     const [arePostsLoading, setArePostsLoading] = useState(true);
     const [filteredPosts, setFilteredPosts] = useState([]);
+    const [isActive, setIsActive] = useState('');
 
     useEffect(() => {
         if (searchTerm !== '') {
@@ -116,14 +117,18 @@ function PostsList({ searchTerm }) {
                     filteredPosts.map((post) => (
                         <StyledPostCard
                             key={post.p_id}
+                            className={(isActive === post.p_id) ? `active-post` : ``}
                             onClick={() => {
+                                setIsActive(post.p_id);
                                 dispatch(hideSidebar());
                                 dispatch(resetDropdown());
                                 dispatch(toggleContent('other'));
                                 navigate(`/dashboard/${c_id}/${post.p_id}`)
                             }}
                         >
-                            {`post summary : ${post.summary}`}
+                            <div className='inner-post-card'>
+                                {post?.summary}
+                            </div>
                         </StyledPostCard>
                     ))
                     :
