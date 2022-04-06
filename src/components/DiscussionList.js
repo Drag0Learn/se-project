@@ -5,24 +5,7 @@ import { resetDropdown } from '../features/classDropdownToggle/classDropdownTogg
 import { selectCurrentClass, selectJoinedClasses } from '../features/classes/classSlice';
 import { toggleContent } from '../features/mainContentToggle/mainContentToggleSlice';
 import { updateCurrentDiscussion } from '../features/posts/postSlice';
-
-const DiscussionListContainer = styled.div`
-    background-color: var(--primary-color);
-    border: 5px solid orange;
-    width: 100%;
-    height: var(--navbar-height);
-    display: flex;
-    align-items: center;
-    gap: 1em;
-    overflow-x: scroll;
-    overflow-y: hidden;
-
-    &::-webkit-scrollbar,
-    &::-webkit-scrollbar-track,
-    &::-webkit-scrollbar-thumb {
-        display: none;
-    }
-`
+import { DiscussionListContainer, DiscussionListItem } from './styled/DiscussionList.styled';
 
 function DiscussionList() {
     const joinedClasses = useSelector(selectJoinedClasses);
@@ -37,12 +20,12 @@ function DiscussionList() {
 
     return (
         <DiscussionListContainer>
-            <div onClick={() => { handleClick('') }}>All</div>
+            <DiscussionListItem onClick={() => { handleClick('') }}>All</DiscussionListItem>
             {
                 (joinedClasses.length !== 0 && currentClass?.discussions.length !== 0)
                     ?
                     currentClass?.discussions.map(discussion => (
-                        <div onClick={() => { handleClick(discussion) }} key={discussion}>{discussion}</div>
+                        <DiscussionListItem onClick={() => { handleClick(discussion) }} key={discussion}>{discussion}</DiscussionListItem>
                     ))
                     :
                     (

@@ -144,13 +144,19 @@ function PostDetails() {
         if (isValidationComplete) {
             const editPost = async () => {
                 const postDocRef = getDocRefById(post.p_id, `classes/${currentClass.c_id}/posts`);
-                if (formData.type === 'note' && post?.type === 'question') {
+                if (
+                    (formData.type === 'note' && post?.type === 'question')
+                    ||
+                    (formData.type === 'question' && post?.type === 'note')
+                ) {
                     const newData = { ...formData, student_ans: '', instructor_ans: '' };
                     await updateDoc(postDocRef, newData);
                 } else {
                     await updateDoc(postDocRef, formData);
                 }
                 setIsLoading(false);
+                setStudAns(post?.student_ans);
+                setInstructorAns(post?.instructor_ans);
                 // setDiscussionList(initialFormDiscussionList);
                 // setShowName(initialShowName);
                 // setFormData(initialFormData);
@@ -282,7 +288,12 @@ function PostDetails() {
                                     &&
                                     <>
                                         <button disabled={updatingStudAns} type='submit'>Save</button>
-                                        <button onClick={() => setShowSaveBtn(false)}>Cancel</button>
+                                        <button
+                                            onClick={() => {
+                                                setStudAns(post?.student_ans);
+                                                setShowSaveBtn(false);
+                                            }}
+                                        >Cancel</button>
                                     </>
                                 }
                             </form>
@@ -305,7 +316,12 @@ function PostDetails() {
                                     &&
                                     <>
                                         <button disabled={updatingInstructorAns} type='submit'>Save</button>
-                                        <button onClick={() => setShowSaveBtn(false)}>Cancel</button>
+                                        <button
+                                            onClick={() => {
+                                                setInstructorAns(post?.instructor_ans);
+                                                setShowSaveBtn(false);
+                                            }}
+                                        >Cancel</button>
                                     </>
                                 }
                             </form>

@@ -136,6 +136,7 @@ function ResourcesTab() {
     return (
         <div>
             {user.role === 'instructor' && <form onSubmit={onSubmit}>
+                <div>Max file size: {MAX_FILE_SIZE_IN_BYTES / 1000000} MB</div>
                 <label htmlFor="fileInput">
                     Upload File!
                     <input

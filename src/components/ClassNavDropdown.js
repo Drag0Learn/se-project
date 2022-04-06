@@ -24,7 +24,9 @@ function ClassNavDropdown({ className }) {
                 joinedClasses.length !== 0
                     ? joinedClasses.map((cls) => (
                         <div key={cls.c_id}>
-                            <Link onClick={() => { handleClick(cls) }} to={`/dashboard/${cls.c_id}`}>{cls.c_id}</Link>
+                            <Link onClick={() => { handleClick(cls) }} to={`/dashboard/${cls.c_id}`}>
+                                <div>{cls.c_num}</div>
+                            </Link>
                         </div>
                     ))
                     : <Link onClick={handleClick} to="#">you have no classes yet.</Link>

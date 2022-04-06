@@ -123,6 +123,15 @@ function ManageDiscussions() {
 
     return (
         <div>
+            <form onSubmit={createDiscussion}>
+                <input
+                    type="text"
+                    value={newDiscussion}
+                    onChange={(e) => setNewDiscussion(e.target.value)}
+                    onFocus={() => { resetEdit() }}
+                />
+                <button disabled={isCreating} type="submit">Create Discussion</button>
+            </form>
             {
                 discussionList.length > 0
                     ? discussionList.map(discussion => (
@@ -142,15 +151,6 @@ function ManageDiscussions() {
                         <div>No created discussions. Create some discussions below!</div>
                     )
             }
-            <form onSubmit={createDiscussion}>
-                <input
-                    type="text"
-                    value={newDiscussion}
-                    onChange={(e) => setNewDiscussion(e.target.value)}
-                    onFocus={() => { resetEdit() }}
-                />
-                <button disabled={isCreating} type="submit">Create Discussion</button>
-            </form>
         </div>
     );
 }
