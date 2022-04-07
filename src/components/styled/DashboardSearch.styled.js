@@ -2,32 +2,22 @@ import styled from 'styled-components';
 import { media } from '../../common/helpers/mediaQuery';
 
 const SearchBarContainer = styled.div`
-    /* border: 5px solid black; */
+    /* border: 5px solid var(--primary-color); */
     height: calc(2 * var(--navbar-height));
     background-color: var(--primary-color);
     padding: var(--post-card-margin);
     display: flex;
-    flex-wrap: nowrap;
+    
     gap: var(--post-card-margin);
     
     ${media.mobile} {
         margin-top: calc((var(--post-card-margin) * 2) + var(--navbar-height) / 2);
         flex-direction: column;
     }
-
-    /* child 1 is search box */
-    & > *:nth-child(1) {
-        flex: 0.5;
-    }
-
-    /* child 2 is new-post-btn div*/
-    & > *:nth-child(2) {
-        flex: 0.5;
-    }
     
     ${media.desktop} {
         height: var(--navbar-height);
-
+        padding: var(--post-card-margin);
         & > *:nth-child(1) {
             flex: 0.7;
         }
@@ -40,9 +30,18 @@ const SearchBarContainer = styled.div`
 
 `
 
+const SearchBoxContainer = styled.div`
+    border: 5px solid yellow;
+`
+
 const SearchBox = styled.div`
-    height: 100%;
+    /* border: 5px solid red; */
+    overflow: hidden;
     position: relative;
+
+    ${media.mobile} {
+        height: calc(var(--navbar-height) / 1.8);
+    }
 `
 
 const SearchInput = styled.input`
@@ -57,30 +56,35 @@ const SearchInput = styled.input`
 
     &:hover,
     &:focus {
+        outline: none;
         border: 0.1rem solid var(--secondary-color);
     }
 `
 
 const SearchIcon = styled.svg`
     position: absolute;
-    width: var(--div-margin);
-    /* top: var(--post-card-margin); */
-    top: 0.5rem;
-    /* left: var(--post-card-margin); */
-    left: 1rem;
+    display: inline-block;
+    width: 1em;
+    top: 23%;
+    left: var(--post-card-margin);
     color: var(--black-color);
     cursor: text;
 `
 
 const AddPostButton = styled.button`
+    box-shadow: 1px 2px 9px -2px rgba(50,128,255,0.67);
+    -webkit-box-shadow: 1px 2px 9px -2px rgba(50,128,255,0.67);
+    -moz-box-shadow: 1px 2px 9px -2px rgba(50,128,255,0.67);
     font-family: inherit;
+    font-size: var(--small-font-size);
     font-weight: var(--fw-bold);
     width: 100%;
-    height: 100%;
+    /* height: var(--navbar-height); */
     cursor: pointer;
     outline: none;
     border: none;
-    border-radius: var(--div-border-radius);
+    /* border: 5px solid red; */
+    border-radius: calc(var(--div-border-radius) * 2);
     padding: calc(var(--post-card-padding) / 2);
     background-color: var(--secondary-color);
     color: var(--white-color);
@@ -95,14 +99,11 @@ const AddPostButton = styled.button`
     &:hover {
         background-color: var(--dark-secondary-color);
     }
-
-    /* ${media.mobile} {
-        margin-top: var(--post-card-margin);
-    } */
 `
 
 export {
     SearchBarContainer,
+    SearchBoxContainer,
     SearchBox,
     SearchInput,
     AddPostButton,

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { resetDropdown } from '../features/classDropdownToggle/classDropdownToggleSlice';
 import { selectJoinedClasses, updateCurrentClass } from '../features/classes/classSlice';
 import { hideMoreMenu } from '../features/sidebar/sidebarSlice';
-import { ClassNavDropdownContainer } from './styled/Navbar.styled';
+import { ClassNavDropdownContainer, DropdownItem } from './styled/Navbar.styled';
 
 
 function ClassNavDropdown({ className }) {
@@ -23,11 +23,11 @@ function ClassNavDropdown({ className }) {
             {
                 joinedClasses.length !== 0
                     ? joinedClasses.map((cls) => (
-                        <div key={cls.c_id}>
+                        <DropdownItem key={cls.c_id}>
                             <Link onClick={() => { handleClick(cls) }} to={`/dashboard/${cls.c_id}`}>
-                                <div>{cls.c_num}</div>
+                                <div className='dropdown-item'>{cls.c_num}</div>
                             </Link>
-                        </div>
+                        </DropdownItem>
                     ))
                     : <Link onClick={handleClick} to="#">you have no classes yet.</Link>
             }

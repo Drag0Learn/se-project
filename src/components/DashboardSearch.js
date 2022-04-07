@@ -4,7 +4,8 @@ import {
     SearchBox,
     SearchInput,
     AddPostButton,
-    SearchIcon
+    SearchIcon,
+    SearchBoxContainer
 } from './styled/DashboardSearch.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleContent } from '../features/mainContentToggle/mainContentToggleSlice';
@@ -45,6 +46,8 @@ function DashboardSearch({ searchTerm, setSearchTerm }) {
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
             </SearchBox>
+            {/* <SearchBoxContainer>
+            </SearchBoxContainer> */}
             <div className="add-post-btn">
                 <AddPostButton disabled={noCurrentClassAvailable} onClick={handleClick}>New Post</AddPostButton>
             </div>

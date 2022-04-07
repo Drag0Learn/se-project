@@ -10,6 +10,7 @@ const GlobalStyles = createGlobalStyle`
 
         --normal-font-size: 1rem;
         --small-font-size: 0.75rem;
+        --extra-small-font-size: 0.5rem;
         --fw-extra-bold: 900;
         --fw-bold: 700;
         --fw-highlight: 500;

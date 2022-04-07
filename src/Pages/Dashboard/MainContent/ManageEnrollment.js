@@ -49,9 +49,9 @@ function ManageEnrollment() {
             console.log('attendance list is : ', test);
         }
 
-        console.log('test value outside if is : ', test);
+        console.log('test length outside if is : ', test.length);
         // check if total class size exceeds
-        if (test.length + 1 > currentClass.c_size) {
+        if (joinedUsersList.length + test.length > currentClass.c_size) {
             alert('Attendance list exceeds class size. Please remove some users from the list or change the class size.');
             setIsLoading(false);
             return;

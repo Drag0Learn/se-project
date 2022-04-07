@@ -11,7 +11,7 @@ const ContentAreaWrapper = styled.div`
     /* border-bottom: 0.75em solid var(--primary-color); */
 
     ${media.desktop} {
-        flex: 0.7;
+        flex: 1;
     }
 `
 

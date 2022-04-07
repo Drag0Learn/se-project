@@ -22,6 +22,7 @@ import { resetMainContent, toggleContent } from '../features/mainContentToggle/m
 import { resetClasses, selectCurrentClass, selectJoinedClasses } from '../features/classes/classSlice';
 import { resetPosts } from '../features/posts/postSlice';
 import { hideMoreMenu, hideSidebar, selectMoreMenuStatus, showMoreMenu, toggleMore } from '../features/sidebar/sidebarSlice';
+import { DefaultStyledButton } from './styled/DefaultStyledButton';
 // import MoreVertIcon from '@mui/icons-material/MoreVert';
 // import CloseIcon from '@mui/icons-material/Close';
 
@@ -43,7 +44,7 @@ function Navbar() {
 
     //choose the screen size 
     const handleResize = () => {
-        if (window.innerWidth < 720) {
+        if (window.innerWidth < 920) {
             setIsMobile(true)
         } else {
             setIsMobile(false)
@@ -100,16 +101,15 @@ function Navbar() {
             className={showMore ? "make-z-index-big" : ""}
         >
             <LogoSection>
-
                 <NavigationLink
                     onClick={() => {
                         dispatch(resetDropdown());
                         dispatch(hideMoreMenu());
                     }}
-                    className='logo'
+                    className='logo-link'
                     to="/"
                 >
-                    AnswerBoard
+                    <img className='logo-img' src={require("../assets/images/se-project-logo.svg").default} alt="Logo" />
                 </NavigationLink>
                 {(!showMore) ?
                     <MoreVertIcon
@@ -150,7 +150,7 @@ function Navbar() {
                         {
                             user.role === "instructor"
                             &&
-                            <button
+                            <DefaultStyledButton
                                 onClick={() => {
                                     dispatch(toggleContent('create-class'));
                                     dispatch(hideMoreMenu());
@@ -158,9 +158,9 @@ function Navbar() {
                                 }}
                             >
                                 New Class
-                            </button>
+                            </DefaultStyledButton>
                         }
-                        <button
+                        <DefaultStyledButton
                             onClick={() => {
                                 dispatch(toggleContent('join-class'));
                                 dispatch(hideMoreMenu());
@@ -168,7 +168,7 @@ function Navbar() {
                             }}
                         >
                             Join Class
-                        </button>
+                        </DefaultStyledButton>
                     </ButtonGroup>
                 }
 
@@ -186,7 +186,7 @@ function Navbar() {
                         {
                             user.role === "instructor"
                             &&
-                            <button
+                            <DefaultStyledButton
                                 onClick={() => {
                                     dispatch(toggleContent('create-class'));
                                     dispatch(hideMoreMenu());
@@ -194,9 +194,9 @@ function Navbar() {
                                 }}
                             >
                                 New Class
-                            </button>
+                            </DefaultStyledButton>
                         }
-                        <button
+                        <DefaultStyledButton
                             onClick={() => {
                                 dispatch(toggleContent('join-class'));
                                 dispatch(hideMoreMenu());
@@ -204,7 +204,7 @@ function Navbar() {
                             }}
                         >
                             Join Class
-                        </button>
+                        </DefaultStyledButton>
                     </ButtonGroup>
                 }
                 <NavList>
@@ -259,7 +259,9 @@ function Navbar() {
                         )
                     }
                 </NavList>
-                <LogoutBtn onClick={handleLogout}>Logout</LogoutBtn>
+                <div className='logout-div'>
+                    <DefaultStyledButton className='logout-btn' onClick={handleLogout}>Logout</DefaultStyledButton>
+                </div>
             </MoreSection>
         </NavbarContainer>
     );

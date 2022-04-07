@@ -17,7 +17,8 @@ const SidebarContainer = styled.div`
         z-index: 9999;
         background-color: var(--primary-color);
         width: min(75vw, ${mediaScreenSize.mobileSmallMax});
-        border-right: 5px solid var(--gray-color);
+        border-right: 0.5em solid var(--gray-color);
+        border-radius: var(--div-border-radius);
         
 
         ${media.mobileSmall} {
@@ -31,7 +32,7 @@ const SidebarContainer = styled.div`
     }
 
     ${media.desktop} {
-        flex: 0.3;
+        flex: 0.4;
     }
 `
 
