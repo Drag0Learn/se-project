@@ -33,8 +33,9 @@ const GlobalStyles = createGlobalStyle`
         --dark-secondary-color: #1243EB;
         --input-color: #80868B;
         --black-color: #0D1821;
-        --lightGray-color: #D3D3D3;
         --gray-color: #E4E5EA;
+        --light-gray-color: #EBECF2;
+        --dark-gray-color: #D3D3D3;
         --white-color: #FFFFFF;
 
         ${'' /* ROOT CSS SETTINGS */}

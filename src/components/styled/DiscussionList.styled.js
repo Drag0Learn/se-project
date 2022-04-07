@@ -2,12 +2,12 @@ import styled from 'styled-components';
 
 const DiscussionListContainer = styled.div`
     background-color: var(--primary-color);
-    /* border: 5px solid orange; */
     width: 100%;
     height: var(--navbar-height);
     display: flex;
     align-items: center;
-    gap: 1em;
+    gap: var(--post-card-margin);
+    padding-inline: var(--post-card-margin);
     overflow-x: scroll;
     overflow-y: hidden;
 
@@ -19,7 +19,18 @@ const DiscussionListContainer = styled.div`
 `
 
 const DiscussionListItem = styled.div`
+    border-radius: var(--div-border-radius);
+    background-color: var(--gray-color);
+    padding: calc(var(--div-padding) / 2);
     cursor: pointer;
+    
+    &.active-discussion {
+        background-color: var(--light-gray-color);
+
+        box-shadow: -1px 1px 7px 2px rgba(0,0,0,0.2);
+        -webkit-box-shadow: -1px 1px 7px 2px rgba(0,0,0,0.2);
+        -moz-box-shadow: -1px 1px 7px 2px rgba(0,0,0,0.2);
+    }
 `
 
 export {
