@@ -5,6 +5,7 @@ const PostListContainer = styled.div`
     display: flex;
     flex-direction: column;
     overflow-y: auto;
+    margin-block: var(--post-card-margin);
     /* border: 5px solid lightgreen; */
     background-color: var(--primary-color);
 

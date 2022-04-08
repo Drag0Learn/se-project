@@ -6,6 +6,8 @@ import { selectCurrentClass } from '../../../features/classes/classSlice';
 import { selectUser } from '../../../features/user/userSlice';
 import { storage } from '../../../firebase/firebase-config';
 import { getColRef, getDocRefById } from '../../../firebase/firebase-firestore';
+import styled from 'styled-components';
+import { FileUpload } from '@mui/icons-material';
 
 
 function ResourcesTab() {
@@ -135,31 +137,82 @@ function ResourcesTab() {
 
     return (
         <div>
-            {user.role === 'instructor' && <form onSubmit={onSubmit}>
-                <div>Max file size: {MAX_FILE_SIZE_IN_BYTES / 1000000} MB</div>
-                <label htmlFor="fileInput">
-                    Upload File!
-                    <input
-                        style={{ opacity: 0, position: "absolute", left: "-999999px" }}
-                        type="file"
-                        id="fileInput"
-                        onChange={onFileChange}
-                    />
-                </label>
-            </form>}
-            {progress > 0 && <div>
-                upload progress : {progress} %
-            </div>}
-            {resourceList.length > 0 && resourceList.map((resource) => (
-                <div key={resource.id}>
-                    <a href={resource.url} target="_blank">{resource.name}</a>
-                    {user.role === 'instructor' && currentClass?.instructors_list?.includes(user?.email) &&
-                        <div onClick={() => { deleteResource(resource) }}>Delete</div>
-                    }
+            {
+                user.role === 'instructor'
+                &&
+                <UploadFileForm onSubmit={onSubmit}>
+                    <div>Max file size: {MAX_FILE_SIZE_IN_BYTES / 1000000} MB</div>
+                    <label htmlFor="fileInput">
+                        <FileUploadIcon
+                            className='file-upload-icon'
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                        </FileUploadIcon>
+                        <input
+                            style={{ opacity: 0, position: "absolute", left: "-999999px" }}
+                            type="file"
+                            id="fileInput"
+                            onChange={onFileChange}
+                        />
+                    </label>
+                </UploadFileForm>
+            }
+            {
+                progress > 0
+                &&
+                <div>
+                    upload progress : {progress} %
                 </div>
-            ))}
+            }
+            <ResourcesListContainer>
+                {
+                    resourceList.length > 0
+                        ?
+                        resourceList.map((resource) => (
+                            <ResourceItem key={resource.id}>
+                                <a href={resource.url} target="_blank">{resource.name}</a>
+                                {user.role === 'instructor' && currentClass?.instructors_list?.includes(user?.email) &&
+                                    <div onClick={() => { deleteResource(resource) }}>Delete</div>
+                                }
+                            </ResourceItem>
+                        ))
+                        :
+                        (
+                            <div>No Resources yet.</div>
+                        )
+                }
+            </ResourcesListContainer>
         </div>
     );
 }
+
+const FileUploadIcon = styled.svg`
+    width: 2em;
+    cursor: pointer;
+`
+
+const UploadFileForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--post-card-margin);
+    margin-bottom: var(--post-card-margin);
+`
+
+const ResourcesListContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    /* margin-top: var(--post-card-margin); */
+    gap: var(--post-card-margin);
+`
+
+const ResourceItem = styled.div`
+`
 
 export default ResourcesTab;

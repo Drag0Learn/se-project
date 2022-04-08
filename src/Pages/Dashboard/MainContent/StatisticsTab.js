@@ -5,6 +5,7 @@ import { selectCurrentClass } from '../../../features/classes/classSlice';
 import { selectUser } from '../../../features/user/userSlice';
 import { getColRef } from '../../../firebase/firebase-firestore';
 import { StyledPostCard } from '../../../components/styled/PostList.styled';
+import { StyledStatsCard } from '../../../components/styled/StatisticsTab.styled';
 
 function StatisticsTab() {
     const user = useSelector(selectUser);
@@ -31,12 +32,14 @@ function StatisticsTab() {
 
     return (
         <div>
-            <div>Overall Class Statistics</div>
-            {`total current posts : ${currentClass.total_posts}\n`}
-            {`total current comments : ${currentClass.total_contributions - currentClass.total_deleted_contributions - currentClass.total_posts}\n`}
-            {`total overall contributions : ${currentClass.total_contributions}\n`}
-            {`total anonymous contributions : ${currentClass.total_anonymous_contributions}\n`}
-            <br />
+            <StyledStatsCard>
+                <div>Overall Class Statistics</div>
+                {`total current posts : ${currentClass.total_posts}\n`}
+                {`total current comments : ${currentClass.total_contributions - currentClass.total_deleted_contributions - currentClass.total_posts}\n`}
+                {`total overall contributions : ${currentClass.total_contributions}\n`}
+                {`total anonymous contributions : ${currentClass.total_anonymous_contributions}\n`}
+                <br />
+            </StyledStatsCard>
             {myStats.length > 0 &&
                 <>
                     <div>My Stats</div>

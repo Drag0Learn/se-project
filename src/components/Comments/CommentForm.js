@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import Select from 'react-select';
 import { selectCurrentClass } from '../../features/classes/classSlice';
 import { selectUser } from '../../features/user/userSlice';
+import { TextBox } from '../styled/TextBox';
 
 function CommentForm({ postType, submitLabel, handleSubmit, hasCancelButton = false, initialText = '', handleCancel }) {
     const [text, setText] = useState(initialText);
@@ -25,9 +26,10 @@ function CommentForm({ postType, submitLabel, handleSubmit, hasCancelButton = fa
         setText('');
     };
     return <form onSubmit={onSubmit}>
-        <textarea
+        <TextBox
             disabled={postType === 'note'}
             value={text}
+            placeholder={'Comment here...'}
             onChange={(e) => setText(e.target.value)}
         />
         <Select

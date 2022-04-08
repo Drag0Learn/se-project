@@ -7,6 +7,7 @@ import { getColRef, getDocRefById } from '../../firebase/firebase-firestore';
 import Comment from './Comment';
 import CommentForm from './CommentForm';
 import { v4 as uuidV4 } from 'uuid';
+import { CommentsWrapper } from '../styled/Comments.styled';
 
 function Comments({ postType }) {
     const user = useSelector(selectUser);
@@ -111,67 +112,70 @@ function Comments({ postType }) {
     };
 
     const deleteComment = (commentId) => {
-        // delete from database
-        const deleteCommentStart = async () => {
-            setIsLoading(true);
-            const deleteCommentDocRef = getDocRefById(commentId, `classes/${c_id}/posts/${p_id}/comments`);
+        const isOkayToDelete = window.confirm('Are you sure you want to delete?');
+        if (isOkayToDelete) {
+            // delete from database
+            const deleteCommentStart = async () => {
+                setIsLoading(true);
+                const deleteCommentDocRef = getDocRefById(commentId, `classes/${c_id}/posts/${p_id}/comments`);
 
-            const commentsColRef = getColRef(`classes/${c_id}/posts/${p_id}/comments`);
-            const queryChildComments = query(commentsColRef, where('parent_id', '==', commentId));
-            let deletedCommentsCount = 0;
-            try {
-                const snapshot = await getDocs(queryChildComments);
-                // if there are any child comments then
-                if (snapshot.docs.length > 0) {
-                    const promises = snapshot.docs.map(async (doc) => {
-                        const childCommentDocRef = getDocRefById(doc.id, `classes/${c_id}/posts/${p_id}/comments`);
-                        // delete child comments from db
-                        await deleteDoc(childCommentDocRef);
-                        return doc.id;
-                    });
+                const commentsColRef = getColRef(`classes/${c_id}/posts/${p_id}/comments`);
+                const queryChildComments = query(commentsColRef, where('parent_id', '==', commentId));
+                let deletedCommentsCount = 0;
+                try {
+                    const snapshot = await getDocs(queryChildComments);
+                    // if there are any child comments then
+                    if (snapshot.docs.length > 0) {
+                        const promises = snapshot.docs.map(async (doc) => {
+                            const childCommentDocRef = getDocRefById(doc.id, `classes/${c_id}/posts/${p_id}/comments`);
+                            // delete child comments from db
+                            await deleteDoc(childCommentDocRef);
+                            return doc.id;
+                        });
 
-                    // add the child comments to deleted list
-                    let deletedList = await Promise.all(promises);
-                    deletedCommentsCount = deletedList.length;
-                    // after deleting child comments, delete parent too
-                    await deleteDoc(deleteCommentDocRef);
+                        // add the child comments to deleted list
+                        let deletedList = await Promise.all(promises);
+                        deletedCommentsCount = deletedList.length;
+                        // after deleting child comments, delete parent too
+                        await deleteDoc(deleteCommentDocRef);
 
-                    // now add the parent to the local deleted list too
-                    deletedList.push(commentId);
-                    deletedCommentsCount += 1;
-                    // filter the final local list after deleting the comments
-                    const commentListAfterDeleting = backendComments.filter((backendComment) => !deletedList.includes(backendComment.id));
-                    setBackendComments([...commentListAfterDeleting]);
-                } else {
-                    // if there are no child comments, then just delete the parent
-                    await deleteDoc(deleteCommentDocRef);
-                    deletedCommentsCount = 1;
-                    // and filter the final local list after deleting the comments
-                    const commentListAfterDeleting = backendComments.filter((backendComment) => backendComment.id !== commentId);
-                    setBackendComments([...commentListAfterDeleting]);
+                        // now add the parent to the local deleted list too
+                        deletedList.push(commentId);
+                        deletedCommentsCount += 1;
+                        // filter the final local list after deleting the comments
+                        const commentListAfterDeleting = backendComments.filter((backendComment) => !deletedList.includes(backendComment.id));
+                        setBackendComments([...commentListAfterDeleting]);
+                    } else {
+                        // if there are no child comments, then just delete the parent
+                        await deleteDoc(deleteCommentDocRef);
+                        deletedCommentsCount = 1;
+                        // and filter the final local list after deleting the comments
+                        const commentListAfterDeleting = backendComments.filter((backendComment) => backendComment.id !== commentId);
+                        setBackendComments([...commentListAfterDeleting]);
+                    }
+
+                    const updateStats = async () => {
+                        // update post comment count
+                        const postRef = getDocRefById(p_id, `classes/${c_id}/posts`);
+                        await updateDoc(postRef, {
+                            total_comments: increment(-deletedCommentsCount)
+                        });
+
+                        // update class contributions
+                        const classDocRef = getDocRefById(c_id, 'classes');
+                        await updateDoc(classDocRef, {
+                            total_deleted_contributions: increment(deletedCommentsCount)
+                        });
+
+                        setIsLoading(false);
+                    }
+                    updateStats();
+                } catch (err) {
+                    console.log(err.message);
                 }
-
-                const updateStats = async () => {
-                    // update post comment count
-                    const postRef = getDocRefById(p_id, `classes/${c_id}/posts`);
-                    await updateDoc(postRef, {
-                        total_comments: increment(-deletedCommentsCount)
-                    });
-
-                    // update class contributions
-                    const classDocRef = getDocRefById(c_id, 'classes');
-                    await updateDoc(classDocRef, {
-                        total_deleted_contributions: increment(deletedCommentsCount)
-                    });
-
-                    setIsLoading(false);
-                }
-                updateStats();
-            } catch (err) {
-                console.log(err.message);
             }
+            deleteCommentStart();
         }
-        deleteCommentStart();
     };
 
     const updateComment = (showName, text, commentId) => {
@@ -208,10 +212,8 @@ function Comments({ postType }) {
     }
 
     return (
-        <>
-            <strong>Comments</strong>
-            <br />
-            <div>Comment Form</div>
+        <CommentsWrapper>
+            <h4>Comments</h4>
             <CommentForm
                 postType={postType}
                 submitLabel={"COMMENT"}
@@ -236,7 +238,7 @@ function Comments({ postType }) {
                     ))}
                 </>
             }
-        </>
+        </CommentsWrapper>
     );
 }
 

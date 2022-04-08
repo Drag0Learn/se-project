@@ -104,6 +104,7 @@ const MoreSection = styled.div`
     }
 
     ${media.desktop} {
+        /* margin-inline: var(--post-card-margin); */
         display: flex;
         flex: 1;
         justify-content: space-between;
@@ -131,7 +132,6 @@ const NavList = styled.ul`
 
     ${media.desktop} {
         flex: 0.85;
-        gap: calc(var(--post-card-margin) * 2);
         /* border: 5px solid lightgreen; */
     }
 `
@@ -150,6 +150,10 @@ const NavItem = styled.li`
     font-weight: var(--fw-bold);
     cursor: pointer;
     position: relative;
+
+    ${media.desktop} {
+        margin-inline: var(--post-card-margin);
+    }
 `
 
 const ClassNavDropdownContainer = styled.div`
@@ -158,7 +162,8 @@ const ClassNavDropdownContainer = styled.div`
     display: flex;
     flex-direction: column;
     background-color: var(--white-color);
-    border-radius: 1em;
+    border-radius: var(--div-border-radius);
+    /* border-top-left-radius: 0; */
 
     ${media.mobile} {
         margin-top: var(--post-card-margin);
@@ -176,10 +181,15 @@ const ClassNavDropdownContainer = styled.div`
 const DropdownItem = styled.div`
     margin-top: var(--post-card-margin);
     margin-left: var(--post-card-margin);
-    
-    & > .dropdown-item:visited {
+
+    & .dropdown-item {
         text-decoration: none;
+    }
+
+    & .dropdown-item:visited {
         decoration: none;
+        color: var(--black-color);
+        /* color: none; */
     }
 `
 

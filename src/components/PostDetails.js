@@ -9,6 +9,11 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { selectCurrentClass } from '../features/classes/classSlice';
 import { selectUser } from '../features/user/userSlice';
+import { PostBox, PostDetailsContainer } from './styled/PostDetails.styled';
+import { TextBox } from './styled/TextBox';
+import { LikeBtn } from './styled/LikeBtn';
+import { DeleteIcon } from './styled/DeleteIcon';
+import { EditIcon } from './styled/EditIcon';
 
 function PostDetails() {
 
@@ -101,8 +106,7 @@ function PostDetails() {
     };
 
     const handleDelete = () => {
-        const isOkayToDelete = window.confirm('Are you sure you want to delete?\n',
-            'All the comments will also be gone.');
+        const isOkayToDelete = window.confirm('Are you sure you want to delete the post?\nAll the comments will also be gone...');
         if (isOkayToDelete) {
             console.log('post is : ', post);
             const totalDeletedContributions = post.total_comments + 1;
@@ -246,176 +250,212 @@ function PostDetails() {
                 !openEdit
                 &&
                 <>
-                    <div>{`post details are : ${post?.details}`}</div>
-                    <br />
-                    <strong
-                        aria-disabled={isUpdatingLikes}
-                        onClick={likePost}
-                    >
-                        Like : {post?.likes}
-                    </strong>
-                    <br />
-                    {
-                        post?.created_by === user.email
-                        &&
-                        <>
-                            <strong onClick={() => setOpenEdit(true)}>Edit</strong>
+                    <PostDetailsContainer>
+                        <PostBox>
+                            <strong className='post__summary'>{post?.summary}</strong>
                             <br />
-                            <strong onClick={handleDelete}>Delete Post!</strong>
+                            <div className='post__details'>{post?.details}</div>
                             <br />
-                        </>
-                    }
-                    {
-                        post?.type === 'question'
-                        &&
-                        <>
-                            <form onSubmit={submitStudAns}>
-                                <div>
-                                    <textarea
-                                        disabled={(isInstructor)}
-                                        cols="30"
-                                        rows="10"
-                                        placeholder="Students answer here!"
-                                        name="stud_ans"
-                                        value={studAns}
-                                        onChange={(e) => setStudAns(e.target.value)}
-                                        onFocus={() => setShowSaveBtn(true)}
-                                    >
-                                    </textarea>
-                                </div>
+                            <div
+                                className='post-btn-container'
+                            >
+                                <LikeBtn
+                                    className={(isLiked) ? 'liked' : ''}
+                                    aria-disabled={isUpdatingLikes}
+                                    onClick={likePost}
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    strokeWidth={2}
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"
+                                    />
+                                </LikeBtn>
+                                <span>{post?.likes}</span>
                                 {
-                                    !isInstructor && showSaveBtn
+                                    post?.created_by === user.email
                                     &&
                                     <>
-                                        <button disabled={updatingStudAns} type='submit'>Save</button>
-                                        <button
-                                            onClick={() => {
-                                                setStudAns(post?.student_ans);
-                                                setShowSaveBtn(false);
-                                            }}
-                                        >Cancel</button>
+                                        <EditIcon
+                                            onClick={() => setOpenEdit(true)}
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                            strokeWidth={2}
+                                        >
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                        </EditIcon>
+                                        <DeleteIcon
+                                            onClick={handleDelete}
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                            strokeWidth={2}
+                                        >
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </DeleteIcon>
                                     </>
                                 }
-                            </form>
-                            <form onSubmit={submitInstructorAns}>
-                                <div>
-                                    <textarea
-                                        disabled={(!isInstructor)}
-                                        cols="30"
-                                        rows="10"
-                                        placeholder="Instructors answer here!"
-                                        name="inst_ans"
-                                        value={instructorAns}
-                                        onChange={(e) => setInstructorAns(e.target.value)}
-                                        onFocus={() => setShowSaveBtn(true)}
-                                    >
-                                    </textarea>
-                                </div>
-                                {
-                                    isInstructor && showSaveBtn
-                                    &&
-                                    <>
-                                        <button disabled={updatingInstructorAns} type='submit'>Save</button>
-                                        <button
-                                            onClick={() => {
-                                                setInstructorAns(post?.instructor_ans);
-                                                setShowSaveBtn(false);
-                                            }}
-                                        >Cancel</button>
-                                    </>
-                                }
-                            </form>
-                        </>
-                    }
+                            </div>
+                        </PostBox>
+
+                        {
+                            post?.type === 'question'
+                            &&
+                            <>
+                                <form onSubmit={submitStudAns}>
+                                    <div>
+                                        <TextBox
+                                            disabled={(isInstructor)}
+                                            cols="30"
+                                            rows="10"
+                                            placeholder="Students answer here!"
+                                            name="stud_ans"
+                                            value={studAns}
+                                            onChange={(e) => setStudAns(e.target.value)}
+                                            onFocus={() => setShowSaveBtn(true)}
+                                        >
+                                        </TextBox>
+                                    </div>
+                                    {
+                                        !isInstructor && showSaveBtn
+                                        &&
+                                        <>
+                                            <button disabled={updatingStudAns} type='submit'>Save</button>
+                                            <button
+                                                onClick={() => {
+                                                    setStudAns(post?.student_ans);
+                                                    setShowSaveBtn(false);
+                                                }}
+                                            >Cancel</button>
+                                        </>
+                                    }
+                                </form>
+                                <form onSubmit={submitInstructorAns}>
+                                    <div>
+                                        <TextBox
+                                            disabled={(!isInstructor)}
+                                            cols="30"
+                                            rows="10"
+                                            placeholder="Instructors answer here!"
+                                            name="inst_ans"
+                                            value={instructorAns}
+                                            onChange={(e) => setInstructorAns(e.target.value)}
+                                            onFocus={() => setShowSaveBtn(true)}
+                                        >
+                                        </TextBox>
+                                    </div>
+                                    {
+                                        isInstructor && showSaveBtn
+                                        &&
+                                        <>
+                                            <button disabled={updatingInstructorAns} type='submit'>Save</button>
+                                            <button
+                                                onClick={() => {
+                                                    setInstructorAns(post?.instructor_ans);
+                                                    setShowSaveBtn(false);
+                                                }}
+                                            >Cancel</button>
+                                        </>
+                                    }
+                                </form>
+                            </>
+                        }
+                    </PostDetailsContainer>
                     <Comments postType={post?.type} />
                 </>
             }
             {
                 openEdit
                 &&
-                <>
+                <div className='edit-post_form_wrapper'>
                     <div>EditPostForm</div>
-                    <div className='edit-post_form_wrapper'>
-                        <form onSubmit={handleSubmit}>
-                            <div>
-                                <p>Post type : </p>
-                                <input type="radio" id="question"
-                                    name="type"
-                                    value="question"
-                                    checked={isChecked('question')}
-                                    onChange={onChange}
-                                />
-                                <label htmlFor="question">Question</label>
+                    <form onSubmit={handleSubmit}>
+                        <div>
+                            <p>Post type : </p>
+                            <input type="radio" id="question"
+                                name="type"
+                                value="question"
+                                checked={isChecked('question')}
+                                onChange={onChange}
+                            />
+                            <label htmlFor="question">Question</label>
 
-                                {/* <input type="radio" id="poll" name="type" value="question" />
+                            {/* <input type="radio" id="poll" name="type" value="question" />
                         <label htmlFor="poll">Poll</label> */}
 
-                                <input type="radio" id="note"
-                                    name="type"
-                                    value="note"
-                                    checked={isChecked('note')}
-                                    onChange={onChange}
-                                />
-                                <label htmlFor="note">Note</label>
-                            </div>
-                            <div>
-                                <p>Select Discussion : </p>
-                                <Select
-                                    components={makeAnimated()}
-                                    value={discussionList}
-                                    options={discussions}
-                                    onChange={setDiscussionList}
-                                    placeholder='Please select discussion(s)'
-                                    noOptionsMessage={() => 'No discussions to select...'}
-                                    isMulti
-                                    isSearchable
-                                />
-                            </div>
-                            <div>
-                                <p>Summary : </p>
-                                <input
-                                    type="text"
-                                    placeholder="Enter the summary here"
-                                    name="summary"
-                                    value={summary}
-                                    onChange={onChange}
-                                />
-                            </div>
-                            <div>
-                                <p>Details : </p>
-                                <textarea
-                                    cols="30"
-                                    rows="10"
-                                    placeholder="Enter the details here"
-                                    name="details"
-                                    value={details}
-                                    onChange={onChange}
-                                >
-                                </textarea>
-                            </div>
-                            <div>
-                                <p>Show my name as : </p>
-                                <Select
-                                    value={showName}
-                                    options={nameOptions}
-                                    onChange={setShowName}
-                                    placeholder='Please select show name(s)'
-                                />
-                            </div>
-                            <button disabled={isLoading} type="submit">Save</button>
-                            <button
-                                onClick={() => {
-                                    setDiscussionList(initialFormDiscussionList);
-                                    setShowName(initialShowName);
-                                    setFormData(initialFormData);
-                                    setOpenEdit(false);
-                                }}
+                            <input type="radio" id="note"
+                                name="type"
+                                value="note"
+                                checked={isChecked('note')}
+                                onChange={onChange}
+                            />
+                            <label htmlFor="note">Note</label>
+                        </div>
+                        <div>
+                            <p>Select Discussion : </p>
+                            <Select
+                                components={makeAnimated()}
+                                value={discussionList}
+                                options={discussions}
+                                onChange={setDiscussionList}
+                                placeholder='Please select discussion(s)'
+                                noOptionsMessage={() => 'No discussions to select...'}
+                                isMulti
+                                isSearchable
+                            />
+                        </div>
+                        <div>
+                            <p>Summary : </p>
+                            <input
+                                type="text"
+                                placeholder="Enter the summary here"
+                                name="summary"
+                                value={summary}
+                                onChange={onChange}
+                            />
+                        </div>
+                        <div>
+                            <p>Details : </p>
+                            <TextBox
+                                cols="30"
+                                rows="10"
+                                placeholder="Enter the details here"
+                                name="details"
+                                value={details}
+                                onChange={onChange}
                             >
-                                Cancel
-                            </button>
-                        </form>
-                    </div>
-                </>
+                            </TextBox>
+                        </div>
+                        <div>
+                            <p>Show my name as : </p>
+                            <Select
+                                value={showName}
+                                options={nameOptions}
+                                onChange={setShowName}
+                                placeholder='Please select show name(s)'
+                            />
+                        </div>
+                        <button disabled={isLoading} type="submit">Save</button>
+                        <button
+                            onClick={() => {
+                                setDiscussionList(initialFormDiscussionList);
+                                setShowName(initialShowName);
+                                setFormData(initialFormData);
+                                setOpenEdit(false);
+                            }}
+                        >
+                            Cancel
+                        </button>
+                    </form>
+                </div>
+
             }
         </>
     );

@@ -57,6 +57,7 @@ const GlobalStyles = createGlobalStyle`
 
     ::-webkit-scrollbar-thumb {
         background-color: var(--black-color);
+        ${'' /* background: rgba(0, 0, 0, 0.5); */}
         border: calc(var(--div-margin) / 5) solid var(--primary-color);
         border-radius: calc(var(--div-margin) / 2);
 

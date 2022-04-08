@@ -61,7 +61,10 @@ function Dashboard() {
                 })
         });
 
-        return unsubscribe;
+        return () => {
+            console.log('dashboard unmounted.');
+            unsubscribe();
+        };
     }, []);
 
     useEffect(() => {
@@ -71,6 +74,7 @@ function Dashboard() {
             }
         }
     }, [isCurrentClassLoading]);
+
 
     useEffect(() => {
         console.log('inside change class useeffect');
@@ -101,7 +105,10 @@ function Dashboard() {
                     })
             });
 
-            return unsubscribe;
+            return () => {
+                console.log('curr cls unmounted dashboard.');
+                unsubscribe();
+            };
         }
     }, [currentClass])
 

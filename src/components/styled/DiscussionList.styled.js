@@ -7,7 +7,7 @@ const DiscussionListContainer = styled.div`
     display: flex;
     align-items: center;
     gap: var(--post-card-margin);
-    padding-inline: var(--post-card-margin);
+    padding: var(--post-card-margin);
     overflow-x: scroll;
     overflow-y: hidden;
 
@@ -24,6 +24,10 @@ const DiscussionListItem = styled.div`
     padding: calc(var(--div-padding) / 2);
     cursor: pointer;
     
+    &:hover {
+        background-color: var(--dark-gray-color);
+    }
+
     &.active-discussion {
         background-color: var(--light-gray-color);
 

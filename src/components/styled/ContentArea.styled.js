@@ -5,10 +5,9 @@ const ContentAreaWrapper = styled.div`
     height: 100%;
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
-    /* border: 5px solid red; */
-    background-color: var(--white-color);
-    /* border-bottom: 0.75em solid var(--primary-color); */
+    /* overflow-y: auto; */
+    background-color: var(--primary-color);
+    /* border-bottom: var(--post-card-margin) solid var(--primary-color); */
 
     ${media.desktop} {
         flex: 1;

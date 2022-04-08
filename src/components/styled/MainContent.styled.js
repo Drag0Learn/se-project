@@ -1,17 +1,31 @@
 import styled from 'styled-components';
+import { media } from '../../common/helpers/mediaQuery';
 
 const MainContentWrapper = styled.div`
     height: 100%;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-    /* border: 5px solid lightgreen; */
-    /* margin: 0.75em; */
-    background-color: var(--primary-color);
-    
-    /* &::-webkit-scrollbar-track {
-        background-color: var(--white-color);        
-    } */
+    margin-block: var(--post-card-margin);
+    border-radius: var(--div-border-radius);
+    background-color: var(--white-color);
 `
 
-export { MainContentWrapper };
+const MainContentOverflowDiv = styled.div`
+    overflow-y: auto;
+    height: 100%;
+    background-color: var(--primary-color);
+    border-radius: var(--div-border-radius);
+    margin: var(--post-card-margin);
+    margin-right: 0;
+    padding: var(--post-card-margin);
+
+    ${media.desktop} {
+        margin-right: var(--post-card-margin);
+    }
+`
+
+export {
+    MainContentWrapper,
+    MainContentOverflowDiv
+};

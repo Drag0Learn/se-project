@@ -3,7 +3,7 @@ import PostDetails from '../../../components/PostDetails';
 import NewPostForm from './NewPostForm';
 import CreateClass from './CreateClass';
 import JoinClass from './JoinClass';
-import { MainContentWrapper } from '../../../components/styled/MainContent.styled';
+import { MainContentOverflowDiv, MainContentWrapper } from '../../../components/styled/MainContent.styled';
 import { useSelector } from 'react-redux';
 import { selectMainContent } from '../../../features/mainContentToggle/mainContentToggleSlice';
 import { selectUser } from '../../../features/user/userSlice';
@@ -22,30 +22,30 @@ function MainContent() {
 
     return (
         <MainContentWrapper>
+            <MainContentOverflowDiv>
 
-            {mainContent === 'new-post' && <NewPostForm />}
-            {user.role === 'instructor' && mainContent === 'create-class' && <CreateClass />}
-            {mainContent === 'join-class' && <JoinClass />}
+                {mainContent === 'new-post' && <NewPostForm />}
+                {user.role === 'instructor' && mainContent === 'create-class' && <CreateClass />}
+                {mainContent === 'join-class' && <JoinClass />}
 
-            {
-                mainContent === 'other'
-                &&
-                <>
-                    <Routes>
-                        <Route path=":p_id" element={<PostDetails />} />
-                        <Route path={`resources`} element={<ResourcesTab />} />
-                        <Route path={`statistics`} element={<StatisticsTab />} />
-                        {
-                            canManageClass
-                            &&
-                            <Route path={`manage-class`} element={<ManageClassTab />} />
-                        }
-                        <Route path="*" element={<WelcomePage />} />
-                    </Routes>
-                </>
-            }
-
-
+                {
+                    mainContent === 'other'
+                    &&
+                    <>
+                        <Routes>
+                            <Route path=":p_id" element={<PostDetails />} />
+                            <Route path={`resources`} element={<ResourcesTab />} />
+                            <Route path={`statistics`} element={<StatisticsTab />} />
+                            {
+                                canManageClass
+                                &&
+                                <Route path={`manage-class`} element={<ManageClassTab />} />
+                            }
+                            <Route path="*" element={<WelcomePage />} />
+                        </Routes>
+                    </>
+                }
+            </MainContentOverflowDiv>
         </MainContentWrapper>
     );
 }
