@@ -19,7 +19,7 @@ function CommentForm({ postType, submitLabel, handleSubmit, hasCancelButton = fa
     }
 
     const [showName, setShowName] = useState('');
-    const isTextareaDisabled = text.length === 0 || showName.length === 0;
+    const isTextareaDisabled = text?.length === 0 || showName?.length === 0 || text === null || showName === null;
     const onSubmit = (e) => {
         e.preventDefault();
         handleSubmit(showName.value, text);
