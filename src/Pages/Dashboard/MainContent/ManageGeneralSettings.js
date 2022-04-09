@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { storage } from '../../../firebase/firebase-config';
 import { deleteObject, ref } from 'firebase/storage';
 import { selectAllPosts } from '../../../features/posts/postSlice';
+import { InputField } from '../../../components/styled/InputField';
 
 function ManageGeneralSettings() {
     const navigate = useNavigate();
@@ -135,7 +136,7 @@ function ManageGeneralSettings() {
             <form onSubmit={onSubmit}>
                 <div>
                     <p>Class Name :</p>
-                    <input
+                    <InputField
                         type="text"
                         name='c_name'
                         value={c_name}
@@ -145,7 +146,7 @@ function ManageGeneralSettings() {
                 </div>
                 <div>
                     <p>Class Number :</p>
-                    <input
+                    <InputField
                         type="text"
                         name='c_num'
                         value={c_num}
@@ -155,7 +156,7 @@ function ManageGeneralSettings() {
                 </div>
                 <div>
                     <p>Class Size :</p>
-                    <input
+                    <InputField
                         type="number"
                         name='c_size'
                         value={c_size}
@@ -165,7 +166,7 @@ function ManageGeneralSettings() {
                 </div>
                 <div>
                     <p>Class Term :</p>
-                    <input
+                    <InputField
                         type="text"
                         name='c_term'
                         value={c_term}
@@ -175,7 +176,7 @@ function ManageGeneralSettings() {
                 </div>
                 <div>
                     <p>Access Code (optional) :</p>
-                    <input
+                    <InputField
                         type="text"
                         name='access_code'
                         value={access_code}

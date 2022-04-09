@@ -8,7 +8,9 @@ import { addDoc, getDocs, increment, query, serverTimestamp, setDoc, updateDoc, 
 import { getColRef, getDocRefById } from '../../../firebase/firebase-firestore';
 import { toggleContent } from '../../../features/mainContentToggle/mainContentToggleSlice';
 import { resetDropdown } from '../../../features/classDropdownToggle/classDropdownToggleSlice';
+import { TextBox } from '../../../components/styled/TextBox';
 import { v4 as uuidV4 } from 'uuid';
+import { InputField } from '../../../components/styled/InputField';
 
 function NewPostForm() {
     const dispatch = useDispatch();
@@ -178,7 +180,7 @@ function NewPostForm() {
                     </div>
                     <div>
                         <p>Summary : </p>
-                        <input
+                        <InputField
                             type="text"
                             placeholder="Enter the summary here"
                             name="summary"
@@ -188,7 +190,7 @@ function NewPostForm() {
                     </div>
                     <div>
                         <p>Details : </p>
-                        <textarea
+                        <TextBox
                             cols="30"
                             rows="10"
                             placeholder="Enter the details here"
@@ -196,7 +198,7 @@ function NewPostForm() {
                             value={details}
                             onChange={onChange}
                         >
-                        </textarea>
+                        </TextBox>
                     </div>
                     <div>
                         <p>Show my name as : </p>

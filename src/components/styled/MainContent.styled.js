@@ -17,11 +17,11 @@ const MainContentOverflowDiv = styled.div`
     background-color: var(--primary-color);
     border-radius: var(--div-border-radius);
     margin: var(--post-card-margin);
-    margin-right: 0;
+    /* margin-right: 0; */
     padding: var(--post-card-margin);
 
     ${media.desktop} {
-        margin-right: var(--post-card-margin);
+        /* margin-right: var(--post-card-margin); */
     }
 `
 

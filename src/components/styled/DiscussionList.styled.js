@@ -7,8 +7,26 @@ const DiscussionListContainer = styled.div`
     display: flex;
     align-items: center;
     gap: var(--post-card-margin);
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    &::-webkit-scrollbar,
+    &::-webkit-scrollbar-track,
+    &::-webkit-scrollbar-thumb {
+        display: none;
+    }
+`
+
+const DiscussionListOverflowDiv = styled.div`
+    margin-inline: var(--post-card-margin);
+    background-color: var(--primary-color);
+    width: 100%;
+    height: var(--navbar-height);
+    display: flex;
+    align-items: center;
+    gap: var(--post-card-margin);
     padding: var(--post-card-margin);
-    overflow-x: scroll;
+    overflow-x: auto;
     overflow-y: hidden;
 
     &::-webkit-scrollbar,
@@ -39,5 +57,6 @@ const DiscussionListItem = styled.div`
 
 export {
     DiscussionListContainer,
+    DiscussionListOverflowDiv,
     DiscussionListItem
 };

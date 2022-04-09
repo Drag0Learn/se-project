@@ -85,14 +85,17 @@ function Navbar() {
     }
 
     const handleLogout = async () => {
-        localStorage.removeItem('currentClass');
-        dispatch(hideMoreMenu());
-        dispatch(resetPosts());
-        dispatch(resetDropdown());
-        dispatch(resetMainContent());
-        dispatch(resetClasses());
-        setStoreResetDone(true);
-        dispatch(logout());
+        const isOkayToDelete = window.confirm('Are you sure you want to logout?');
+        if (isOkayToDelete) {
+            localStorage.removeItem('currentClass');
+            dispatch(hideMoreMenu());
+            dispatch(resetPosts());
+            dispatch(resetDropdown());
+            dispatch(resetMainContent());
+            dispatch(resetClasses());
+            setStoreResetDone(true);
+            dispatch(logout());
+        }
     }
 
 
@@ -260,7 +263,12 @@ function Navbar() {
                     }
                 </NavList>
                 <div className='logout-div'>
-                    <DefaultStyledButton className='logout-btn' onClick={handleLogout}>Logout</DefaultStyledButton>
+                    <DefaultStyledButton
+                        className='logout-btn'
+                        onClick={handleLogout}
+                    >
+                        Logout
+                    </DefaultStyledButton>
                 </div>
             </MoreSection>
         </NavbarContainer>

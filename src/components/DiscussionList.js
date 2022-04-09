@@ -5,7 +5,7 @@ import { resetDropdown } from '../features/classDropdownToggle/classDropdownTogg
 import { selectCurrentClass, selectJoinedClasses } from '../features/classes/classSlice';
 import { toggleContent } from '../features/mainContentToggle/mainContentToggleSlice';
 import { updateCurrentDiscussion } from '../features/posts/postSlice';
-import { DiscussionListContainer, DiscussionListItem } from './styled/DiscussionList.styled';
+import { DiscussionListContainer, DiscussionListItem, DiscussionListOverflowDiv } from './styled/DiscussionList.styled';
 
 function DiscussionList() {
     const joinedClasses = useSelector(selectJoinedClasses);
@@ -22,29 +22,31 @@ function DiscussionList() {
 
     return (
         <DiscussionListContainer>
-            <DiscussionListItem
-                className={activeDiscussion === '' ? 'active-discussion' : ''}
-                onClick={() => { handleClick('') }}
-            >
-                All
-            </DiscussionListItem>
-            {
-                (joinedClasses.length !== 0 && currentClass?.discussions.length !== 0)
-                    ?
-                    currentClass?.discussions.map(discussion => (
-                        <DiscussionListItem
-                            key={discussion}
-                            className={activeDiscussion === discussion ? 'active-discussion' : ''}
-                            onClick={() => { handleClick(discussion) }}
-                        >
-                            {discussion}
-                        </DiscussionListItem>
-                    ))
-                    :
-                    (
-                        <></>
-                    )
-            }
+            <DiscussionListOverflowDiv>
+                <DiscussionListItem
+                    className={activeDiscussion === '' ? 'active-discussion' : ''}
+                    onClick={() => { handleClick('') }}
+                >
+                    All
+                </DiscussionListItem>
+                {
+                    (joinedClasses.length !== 0 && currentClass?.discussions.length !== 0)
+                        ?
+                        currentClass?.discussions.map(discussion => (
+                            <DiscussionListItem
+                                key={discussion}
+                                className={activeDiscussion === discussion ? 'active-discussion' : ''}
+                                onClick={() => { handleClick(discussion) }}
+                            >
+                                {discussion}
+                            </DiscussionListItem>
+                        ))
+                        :
+                        (
+                            <></>
+                        )
+                }
+            </DiscussionListOverflowDiv>
         </DiscussionListContainer>
     );
 }

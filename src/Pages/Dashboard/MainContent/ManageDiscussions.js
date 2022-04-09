@@ -5,6 +5,7 @@ import Discussion from '../../../components/Discussion';
 import { selectCurrentClass } from '../../../features/classes/classSlice';
 import { selectAllPosts } from '../../../features/posts/postSlice';
 import { getDocRefById } from '../../../firebase/firebase-firestore';
+import { InputField } from '../../../components/styled/InputField';
 
 function ManageDiscussions() {
     const currentClass = useSelector(selectCurrentClass);
@@ -124,7 +125,7 @@ function ManageDiscussions() {
     return (
         <div>
             <form onSubmit={createDiscussion}>
-                <input
+                <InputField
                     type="text"
                     value={newDiscussion}
                     onChange={(e) => setNewDiscussion(e.target.value)}

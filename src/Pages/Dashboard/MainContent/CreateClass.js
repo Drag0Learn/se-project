@@ -7,6 +7,8 @@ import { toggleContent } from '../../../features/mainContentToggle/mainContentTo
 import { selectJoinedClasses } from '../../../features/classes/classSlice';
 import { resetDropdown } from '../../../features/classDropdownToggle/classDropdownToggleSlice';
 import { useNavigate } from 'react-router-dom';
+import { TextBox } from '../../../components/styled/TextBox';
+import { InputField } from '../../../components/styled/InputField';
 
 function CreateClass() {
     const user = useSelector(selectUser);
@@ -135,7 +137,7 @@ function CreateClass() {
                 <form onSubmit={handleSubmit}>
                     <div>
                         <p>Class Name :</p>
-                        <input
+                        <InputField
                             type="text"
                             name='c_name'
                             value={c_name}
@@ -145,7 +147,7 @@ function CreateClass() {
                     </div>
                     <div>
                         <p>Class Number :</p>
-                        <input
+                        <InputField
                             type="text"
                             name='c_num'
                             value={c_num}
@@ -155,8 +157,9 @@ function CreateClass() {
                     </div>
                     <div>
                         <p>Class Size :</p>
-                        <input
+                        <InputField
                             type="number"
+                            min="0"
                             name='c_size'
                             value={c_size}
                             onChange={onChange}
@@ -165,7 +168,7 @@ function CreateClass() {
                     </div>
                     <div>
                         <p>Class Term :</p>
-                        <input
+                        <InputField
                             type="text"
                             name='c_term'
                             value={c_term}
@@ -175,7 +178,7 @@ function CreateClass() {
                     </div>
                     <div>
                         <p>Access Code (optional) :</p>
-                        <input
+                        <InputField
                             type="text"
                             name='access_code'
                             value={access_code}
@@ -213,7 +216,7 @@ function CreateClass() {
                     </div>
                     <div>
                         <p>Attendance list :</p>
-                        <textarea
+                        <TextBox
                             cols="30"
                             rows="10"
                             placeholder="(please write emails of class participants on new line)"

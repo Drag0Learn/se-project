@@ -53,11 +53,15 @@ const SearchInput = styled.input`
     outline: none;
     padding-left: calc(2 * var(--post-card-padding));
     background-color: var(--white-color);
-
+    
     &:hover,
     &:focus {
         outline: none;
         border: 0.1rem solid var(--secondary-color);
+    }
+    
+    ${media.desktop} {
+        padding-left: calc(1.6 * var(--post-card-padding));
     }
 `
 

@@ -6,9 +6,19 @@ const PostDetailsContainer = styled.div`
 
 const PostBox = styled.div`
     margin-bottom: var(--post-card-margin);
+
+    & .post-btn-container {
+        display: flex;
+        justify-content: space-between;
+    }
+`
+
+const EditDeleteBtnGroup = styled.div`
+
 `
 
 export {
     PostDetailsContainer,
-    PostBox
+    PostBox,
+    EditDeleteBtnGroup
 };

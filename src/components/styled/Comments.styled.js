@@ -9,6 +9,18 @@ const CommentsWrapper = styled.div`
     }
 `
 
+const CommentContainer = styled.div`
+    & .comment-btn-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    & .reply-btn-span {
+        cursor: pointer;
+    }
+`
+
 export {
-    CommentsWrapper
+    CommentsWrapper,
+    CommentContainer
 };

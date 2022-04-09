@@ -7,8 +7,7 @@ import { selectUser } from '../../../features/user/userSlice';
 import { storage } from '../../../firebase/firebase-config';
 import { getColRef, getDocRefById } from '../../../firebase/firebase-firestore';
 import styled from 'styled-components';
-import { FileUpload } from '@mui/icons-material';
-
+import { DeleteIcon } from '../../../components/styled/DeleteIcon';
 
 function ResourcesTab() {
     const currentClass = useSelector(selectCurrentClass);
@@ -176,8 +175,21 @@ function ResourcesTab() {
                         resourceList.map((resource) => (
                             <ResourceItem key={resource.id}>
                                 <a href={resource.url} target="_blank">{resource.name}</a>
-                                {user.role === 'instructor' && currentClass?.instructors_list?.includes(user?.email) &&
-                                    <div onClick={() => { deleteResource(resource) }}>Delete</div>
+                                {
+                                    user.role === 'instructor'
+                                    &&
+                                    currentClass?.instructors_list?.includes(user?.email)
+                                    &&
+                                    <DeleteIcon
+                                        onClick={() => { deleteResource(resource) }}
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                        strokeWidth={2}
+                                    >
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    </DeleteIcon>
                                 }
                             </ResourceItem>
                         ))
@@ -213,6 +225,19 @@ const ResourcesListContainer = styled.div`
 `
 
 const ResourceItem = styled.div`
+    display: flex;
+    justify-content: space-between;
+    color: var(--black-color);
+
+    & > a {
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    & > a:visited {
+        decoration: none;
+        color: var(--black-color);
+    }
 `
 
 export default ResourcesTab;

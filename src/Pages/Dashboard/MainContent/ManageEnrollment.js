@@ -4,6 +4,9 @@ import { useSelector } from 'react-redux';
 import { selectCurrentClass } from '../../../features/classes/classSlice';
 import { getDocRefById } from '../../../firebase/firebase-firestore';
 import { selectUser } from '../../../features/user/userSlice';
+import { TextBox } from '../../../components/styled/TextBox';
+import { MinusIcon } from '../../../components/styled/MinusIcon';
+import styled from 'styled-components';
 
 function ManageEnrollment() {
     const user = useSelector(selectUser);
@@ -78,20 +81,12 @@ function ManageEnrollment() {
     }
 
     return (
-        <div>JOINED USERS :
-            <div>
-                {joinedUsersList.map((joinedUser) => (
-                    <div key={joinedUser}>
-                        <div>{joinedUser}</div>
-                        <div onClick={() => handleDrop([joinedUser])}>Drop</div>
-                    </div>
-                ))}
-            </div>
+        <div>
             ENROLL STUDENTS :
             <div>
                 <form onSubmit={handleSubmit}>
 
-                    <textarea
+                    <TextBox
                         cols="30"
                         rows="10"
                         placeholder="(please write emails of class participants on new line)"
@@ -102,8 +97,31 @@ function ManageEnrollment() {
                     <button disabled={isLoading} type="submit">Enroll</button>
                 </form>
             </div>
+            JOINED USERS :
+            <div>
+                {joinedUsersList.map((joinedUser) => (
+                    <EnrollmentList key={joinedUser}>
+                        <div>{joinedUser}</div>
+                        <MinusIcon
+                            onClick={() => handleDrop([joinedUser])}
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </MinusIcon>
+                    </EnrollmentList>
+                ))}
+            </div>
         </div>
     );
 }
+
+const EnrollmentList = styled.div`
+    display: flex;
+    justify-content: space-between;
+`
 
 export default ManageEnrollment;

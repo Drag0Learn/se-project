@@ -8,7 +8,7 @@ import { selectUser } from '../../../features/user/userSlice';
 import { toggleContent } from '../../../features/mainContentToggle/mainContentToggleSlice';
 import { resetDropdown } from '../../../features/classDropdownToggle/classDropdownToggleSlice';
 import { useNavigate } from 'react-router-dom';
-import Select from 'react-select';
+import { InputField } from '../../../components/styled/InputField';
 
 function JoinClass() {
     const [formData, setFormData] = useState({
@@ -192,7 +192,7 @@ function JoinClass() {
                 <form onSubmit={handleSubmit}>
                     <div>
                         <p>Class Name :</p>
-                        <input
+                        <InputField
                             type="text"
                             name='c_name'
                             value={c_name}
@@ -201,7 +201,7 @@ function JoinClass() {
                     </div>
                     <div>
                         <p>Class Number :</p>
-                        <input
+                        <InputField
                             type="text"
                             name='c_num'
                             value={c_num}
@@ -210,7 +210,7 @@ function JoinClass() {
                     </div>
                     <div>
                         <p>Class Term :</p>
-                        <input
+                        <InputField
                             type="text"
                             name='c_term'
                             value={c_term}
@@ -219,7 +219,7 @@ function JoinClass() {
                     </div>
                     <div>
                         <p>Access Code (optional) :</p>
-                        <input
+                        <InputField
                             type="text"
                             name='access_code'
                             value={access_code}

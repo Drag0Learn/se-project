@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-const TextBox = styled.textarea`
+const InputField = styled.input`
     width: 100%;
-    height: calc(var(--navbar-height) * 2);
+    height: calc(var(--navbar-height) * 0.6);
     padding-block: var(--post-card-margin);
     padding-inline: var(--post-card-margin);
     /* margin-block: var(--post-card-margin); */
@@ -27,5 +27,5 @@ const TextBox = styled.textarea`
 `
 
 export {
-    TextBox
+    InputField
 };
