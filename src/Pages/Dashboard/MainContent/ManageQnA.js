@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectCurrentClass } from '../../../features/classes/classSlice';
 import { getDocRefById } from '../../../firebase/firebase-firestore';
+import { FieldLabel } from '../../../components/styled/FieldLabel';
 
 function ManageQnA() {
     const currentClass = useSelector(selectCurrentClass);
@@ -28,9 +29,12 @@ function ManageQnA() {
     };
 
     return (
-        <div>ManageQnA
+        <div>
             <form onSubmit={handleSubmit}>
-                Class Anonymity :
+                <FieldLabel>
+                    Class Anonymity :
+
+                </FieldLabel>
                 <div>
                     <label htmlFor="manage-anonymity-true">
                         <input

@@ -170,6 +170,10 @@ const ClassNavDropdownContainer = styled.div`
     }
     
     ${media.desktop} {
+        box-shadow: -1px 1px 7px 2px rgba(0,0,0,0.2);
+        -webkit-box-shadow: -1px 1px 7px 2px rgba(0,0,0,0.2);
+        -moz-box-shadow: -1px 1px 7px 2px rgba(0,0,0,0.2);
+        
         position: absolute;
         top: var(--navbar-height);
         width: 200px;

@@ -98,7 +98,7 @@ function Login() {
                         />
                         <StyledLabel className="form__label" htmlFor="email">Email</StyledLabel>
                     </StyledFormDiv>
-                    <div>
+                    <div className='error-field'>
                         <p>{formErrors.email}</p>
                     </div>
                     <StyledFormDiv>
@@ -112,7 +112,7 @@ function Login() {
                         />
                         <StyledLabel className="form__label" htmlFor="password">Password</StyledLabel>
                     </StyledFormDiv>
-                    <div>
+                    <div className='error-field'>
                         <p>{formErrors.password}</p>
                     </div>
                     <StyledButton disabled={isLoading} type="submit">Login</StyledButton>

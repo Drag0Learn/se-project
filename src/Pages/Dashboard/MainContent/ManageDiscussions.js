@@ -6,6 +6,7 @@ import { selectCurrentClass } from '../../../features/classes/classSlice';
 import { selectAllPosts } from '../../../features/posts/postSlice';
 import { getDocRefById } from '../../../firebase/firebase-firestore';
 import { InputField } from '../../../components/styled/InputField';
+import styled from 'styled-components';
 
 function ManageDiscussions() {
     const currentClass = useSelector(selectCurrentClass);
@@ -133,27 +134,36 @@ function ManageDiscussions() {
                 />
                 <button disabled={isCreating} type="submit">Create Discussion</button>
             </form>
-            {
-                discussionList.length > 0
-                    ? discussionList.map(discussion => (
-                        <div key={discussion}>
-                            <Discussion
-                                discussion={discussion}
-                                currentInput={currentInput}
-                                setCurrentInput={setCurrentInput}
-                                handleEdit={handleEdit}
-                                handleDelete={handleDelete}
-                                resetEdit={resetEdit}
-                                isEditing={isEditing}
-                            />
-                        </div>
-                    ))
-                    : (
-                        <div>No created discussions. Create some discussions below!</div>
-                    )
-            }
+            <DiscussionListContainerManage>
+
+                {
+                    discussionList.length > 0
+                        ? discussionList.map(discussion => (
+                            <div key={discussion}>
+                                <Discussion
+                                    discussion={discussion}
+                                    currentInput={currentInput}
+                                    setCurrentInput={setCurrentInput}
+                                    handleEdit={handleEdit}
+                                    handleDelete={handleDelete}
+                                    resetEdit={resetEdit}
+                                    isEditing={isEditing}
+                                />
+                            </div>
+                        ))
+                        : (
+                            <div>No created discussions. Create some discussions below!</div>
+                        )
+                }
+            </DiscussionListContainerManage>
         </div>
     );
 }
+
+const DiscussionListContainerManage = styled.div`
+    margin-top: var(--post-card-margin);
+    display: flex;
+    flex-direction: column;
+`
 
 export default ManageDiscussions;

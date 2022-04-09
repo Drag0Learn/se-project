@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { EditIcon } from '../components/styled/EditIcon';
 import { DeleteIcon } from './styled/DeleteIcon';
 import styled from 'styled-components';
+import { InputField } from './styled/InputField';
 
 function Discussion({
     discussion,
@@ -54,13 +55,12 @@ function Discussion({
                 openEdit
                 &&
                 <form onSubmit={(e) => handleEdit(e, discussion, editedName)}>
-                    <input
+                    <InputField
                         type="text"
                         value={editedName}
                         onChange={(e) => setEditedName(e.target.value)}
 
                     />
-                    <div>{editedName}</div>
                     <button disabled={isEditing} type="submit">Update</button>
                     <button
                         type='button'
@@ -78,11 +78,13 @@ function Discussion({
 }
 
 const DiscussionContainer = styled.div`
+    margin-top: var(--post-card-margin);
     display: flex;
     flex-direction: column;
 `
 
 const DiscussionItem = styled.div`
+    /* margin-top: var(--post-card-margin); */
     display: flex;
     justify-content: space-between;
 `

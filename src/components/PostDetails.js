@@ -14,6 +14,8 @@ import { TextBox } from './styled/TextBox';
 import { LikeBtn } from './styled/LikeBtn';
 import { DeleteIcon } from './styled/DeleteIcon';
 import { EditIcon } from './styled/EditIcon';
+import { InputField } from '../components/styled/InputField';
+import { FieldLabel } from '../components/styled/FieldLabel';
 
 function PostDetails() {
 
@@ -378,10 +380,9 @@ function PostDetails() {
                 openEdit
                 &&
                 <div className='edit-post_form_wrapper'>
-                    <div>EditPostForm</div>
                     <form onSubmit={handleSubmit}>
                         <div>
-                            <p>Post type : </p>
+                            <FieldLabel>Post type : </FieldLabel>
                             <input type="radio" id="question"
                                 name="type"
                                 value="question"
@@ -402,7 +403,7 @@ function PostDetails() {
                             <label htmlFor="note">Note</label>
                         </div>
                         <div>
-                            <p>Select Discussion : </p>
+                            <FieldLabel>Select Discussion : </FieldLabel>
                             <Select
                                 components={makeAnimated()}
                                 value={discussionList}
@@ -415,8 +416,9 @@ function PostDetails() {
                             />
                         </div>
                         <div>
-                            <p>Summary : </p>
-                            <input
+                            <FieldLabel className='edit-post__summary'>Summary : </FieldLabel>
+                            <InputField
+                                id='edit-post__summary'
                                 type="text"
                                 placeholder="Enter the summary here"
                                 name="summary"
@@ -425,8 +427,9 @@ function PostDetails() {
                             />
                         </div>
                         <div>
-                            <p>Details : </p>
+                            <FieldLabel className='edit-post__details'>Details : </FieldLabel>
                             <TextBox
+                                id='edit-post__details'
                                 cols="30"
                                 rows="10"
                                 placeholder="Enter the details here"
@@ -437,7 +440,7 @@ function PostDetails() {
                             </TextBox>
                         </div>
                         <div>
-                            <p>Show my name as : </p>
+                            <FieldLabel>Show my name as : </FieldLabel>
                             <Select
                                 value={showName}
                                 options={nameOptions}
@@ -447,6 +450,7 @@ function PostDetails() {
                         </div>
                         <button disabled={isLoading} type="submit">Save</button>
                         <button
+                            type='button'
                             onClick={() => {
                                 setDiscussionList(initialFormDiscussionList);
                                 setShowName(initialShowName);

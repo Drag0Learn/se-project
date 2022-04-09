@@ -5,8 +5,7 @@ import { selectCurrentClass } from '../../../features/classes/classSlice';
 import { selectUser } from '../../../features/user/userSlice';
 import { getColRef } from '../../../firebase/firebase-firestore';
 import { StyledPostCard } from '../../../components/styled/PostList.styled';
-import { StyledStatsCard } from '../../../components/styled/StatisticsTab.styled';
-import styled from 'styled-components';
+import { MyStats, StatItem, StyledStatsCard } from '../../../components/styled/StatisticsTab.styled';
 
 function StatisticsTab() {
     const user = useSelector(selectUser);
@@ -34,14 +33,15 @@ function StatisticsTab() {
     return (
         <div>
             <StyledStatsCard>
-                <div>Overall Class Statistics</div>
+                <h4>Overall Class Statistics</h4>
                 <p>{`total current posts : ${currentClass.total_posts}`}</p>
                 <p>{`total current comments : ${currentClass.total_contributions - currentClass.total_deleted_contributions - currentClass.total_posts}`}</p>
                 <p>{`total overall contributions : ${currentClass.total_contributions}`}</p>
                 <p>{`total anonymous contributions : ${currentClass.total_anonymous_contributions}`}</p>
             </StyledStatsCard>
             {myStats.length > 0 &&
-                <>
+                <StyledStatsCard>
+                    <h4>My Stats</h4>
                     <MyStats>
                         <StatItem>
                             <p>Total contributions :</p>
@@ -52,9 +52,7 @@ function StatisticsTab() {
                             <p>{myStats[0].total_posts}</p>
                         </StatItem>
                     </MyStats>
-                    <pre>{JSON.stringify(myStats[0], null, 2)}</pre>
-                    <br />
-                </>
+                </StyledStatsCard>
             }
             {
                 isOnInstructorList
@@ -76,16 +74,5 @@ function StatisticsTab() {
         </div>
     );
 }
-
-const MyStats = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: calc(var(--post-card-margin) / 2);
-`
-const StatItem = styled.div`
-    margin-inline: min(var(--post-card-margin) * 2, 20%);
-    display: flex;
-    justify-content: space-between;
-`
 
 export default StatisticsTab;

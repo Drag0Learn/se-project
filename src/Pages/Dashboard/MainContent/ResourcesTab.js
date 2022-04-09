@@ -227,16 +227,19 @@ const ResourcesListContainer = styled.div`
 const ResourceItem = styled.div`
     display: flex;
     justify-content: space-between;
-    color: var(--black-color);
-
+    
     & > a {
+        color: var(--dark-secondary-color);
         text-decoration: none;
         cursor: pointer;
     }
 
+    & > a:hover {
+        border-bottom: 1px solid var(--dark-secondary-color);
+    }
+
     & > a:visited {
         decoration: none;
-        color: var(--black-color);
     }
 `
 

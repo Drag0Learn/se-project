@@ -9,6 +9,7 @@ import { toggleContent } from '../../../features/mainContentToggle/mainContentTo
 import { resetDropdown } from '../../../features/classDropdownToggle/classDropdownToggleSlice';
 import { useNavigate } from 'react-router-dom';
 import { InputField } from '../../../components/styled/InputField';
+import { FieldLabel } from '../../../components/styled/FieldLabel';
 
 function JoinClass() {
     const [formData, setFormData] = useState({
@@ -187,12 +188,12 @@ function JoinClass() {
 
     return (
         <>
-            <div>JoinClass</div>
             <div className="create_class_form_wrapper">
                 <form onSubmit={handleSubmit}>
                     <div>
-                        <p>Class Name :</p>
+                        <FieldLabel htmlFor='join-class__c-name'>Class Name :</FieldLabel>
                         <InputField
+                            id='join-class__c-name'
                             type="text"
                             name='c_name'
                             value={c_name}
@@ -200,8 +201,9 @@ function JoinClass() {
                         />
                     </div>
                     <div>
-                        <p>Class Number :</p>
+                        <FieldLabel htmlFor='join-class__c-num'>Class Number :</FieldLabel>
                         <InputField
+                            id='join-class__c-num'
                             type="text"
                             name='c_num'
                             value={c_num}
@@ -209,8 +211,9 @@ function JoinClass() {
                         />
                     </div>
                     <div>
-                        <p>Class Term :</p>
+                        <FieldLabel htmlFor='join-class__c-term'>Class Term :</FieldLabel>
                         <InputField
+                            id='join-class__c-term'
                             type="text"
                             name='c_term'
                             value={c_term}
@@ -218,8 +221,9 @@ function JoinClass() {
                         />
                     </div>
                     <div>
-                        <p>Access Code (optional) :</p>
+                        <FieldLabel htmlFor='join-class__access-code'>Access Code (optional) :</FieldLabel>
                         <InputField
+                            id='join-class__access-code'
                             type="text"
                             name='access_code'
                             value={access_code}

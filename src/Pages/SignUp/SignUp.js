@@ -246,7 +246,7 @@ function SignUp() {
                                     isSearchable
                                     noOptionsMessage={() => 'No such University found'}
                                 />
-                                <div>
+                                <div className='error-field'>
                                     <p>{formErrors.university}</p>
                                 </div>
                             </StyledFormDiv>
@@ -283,7 +283,7 @@ function SignUp() {
                                     isSearchable
                                     noOptionsMessage={() => 'No such role exist'}
                                 />
-                                <div>
+                                <div className='error-field'>
                                     <p>{formErrors.role}</p>
                                 </div>
                             </StyledFormDiv>
@@ -321,7 +321,7 @@ function SignUp() {
                                     Username
                                 </StyledLabel>
                             </StyledFormDiv>
-                            <div>
+                            <div className='error-field'>
                                 <p>{formErrors.username}</p>
                             </div>
                             <StyledFormDiv>
@@ -340,7 +340,7 @@ function SignUp() {
                                     Email
                                 </StyledLabel>
                             </StyledFormDiv>
-                            <div>
+                            <div className='error-field'>
                                 <p>{formErrors.email}</p>
                             </div>
                             <StyledFormDiv>
@@ -359,7 +359,7 @@ function SignUp() {
                                     Password
                                 </StyledLabel>
                             </StyledFormDiv>
-                            <div>
+                            <div className='error-field'>
                                 <p>{formErrors.password}</p>
                             </div>
                             <StyledFormDiv>
@@ -378,7 +378,7 @@ function SignUp() {
                                     Confirm Password
                                 </StyledLabel>
                             </StyledFormDiv>
-                            <div>
+                            <div className='error-field'>
                                 <p>{formErrors.confirmPassword}</p>
                             </div>
                             <StyledButton disabled={isLoading} type="submit">Sign-Up</StyledButton>

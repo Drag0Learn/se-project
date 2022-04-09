@@ -7,6 +7,11 @@ const StyledFormWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    & .error-field {
+        margin: 0.5em;
+        color: var(--error-color);
+    }
 `
 
 const StyledForm = styled.form`
@@ -26,7 +31,7 @@ const StyledForm = styled.form`
 const StyledFormDiv = styled.div`
     position: relative;
     height: var(--input-field-size);
-    margin-bottom: 2.5em;
+    margin-top: 2.5em;
 `
 
 
@@ -90,7 +95,7 @@ const StyledButton = styled.button`
     width: 100%;
     height: var(--input-field-size);
     padding: 0.5em auto;
-    margin-bottom: 1.5em;
+    margin-block: 2.5em;
     outline: none;
     border: none;
     background-color: var(--secondary-color);

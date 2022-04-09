@@ -9,6 +9,7 @@ import { storage } from '../../../firebase/firebase-config';
 import { deleteObject, ref } from 'firebase/storage';
 import { selectAllPosts } from '../../../features/posts/postSlice';
 import { InputField } from '../../../components/styled/InputField';
+import { FieldLabel } from '../../../components/styled/FieldLabel';
 
 function ManageGeneralSettings() {
     const navigate = useNavigate();
@@ -132,11 +133,12 @@ function ManageGeneralSettings() {
     };
 
     return (
-        <div>
-            <form onSubmit={onSubmit}>
+        <StyledGeneralSettingsContainer>
+            <StyledGeneralSettingsForm onSubmit={onSubmit}>
                 <div>
-                    <p>Class Name :</p>
+                    <FieldLabel htmlFor='general-settings__c-name'>Class Name :</FieldLabel>
                     <InputField
+                        id='general-settings__c-name'
                         type="text"
                         name='c_name'
                         value={c_name}
@@ -145,8 +147,9 @@ function ManageGeneralSettings() {
                     />
                 </div>
                 <div>
-                    <p>Class Number :</p>
+                    <FieldLabel htmlFor='general-settings__c-num'>Class Number :</FieldLabel>
                     <InputField
+                        id='general-settings__c-num'
                         type="text"
                         name='c_num'
                         value={c_num}
@@ -155,9 +158,11 @@ function ManageGeneralSettings() {
                     />
                 </div>
                 <div>
-                    <p>Class Size :</p>
+                    <FieldLabel htmlFor='general-settings__c-size'>Class Size :</FieldLabel>
                     <InputField
+                        id='general-settings__c-size'
                         type="number"
+                        min='0'
                         name='c_size'
                         value={c_size}
                         onChange={onChange}
@@ -165,8 +170,9 @@ function ManageGeneralSettings() {
                     />
                 </div>
                 <div>
-                    <p>Class Term :</p>
+                    <FieldLabel htmlFor='general-settings__c-term'>Class Term :</FieldLabel>
                     <InputField
+                        id='general-settings__c-term'
                         type="text"
                         name='c_term'
                         value={c_term}
@@ -175,8 +181,9 @@ function ManageGeneralSettings() {
                     />
                 </div>
                 <div>
-                    <p>Access Code (optional) :</p>
+                    <FieldLabel htmlFor='general-settings__access-code'>Access Code (optional) :</FieldLabel>
                     <InputField
+                        id='general-settings__access-code'
                         type="text"
                         name='access_code'
                         value={access_code}
@@ -184,9 +191,9 @@ function ManageGeneralSettings() {
                     />
                 </div>
                 <button disabled={isLoading} type="submit">Update</button>
-            </form>
-            <strong onClick={handleDelete}>Delete Class!</strong>
-        </div>
+            </StyledGeneralSettingsForm>
+            <button type='button' onClick={handleDelete}>Delete Class!</button>
+        </StyledGeneralSettingsContainer>
     );
 }
 
@@ -194,6 +201,7 @@ const StyledGeneralSettingsContainer = styled.div`
 `
 
 const StyledGeneralSettingsForm = styled.form`
+    
 `
 
 export default ManageGeneralSettings;

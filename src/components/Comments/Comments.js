@@ -112,7 +112,7 @@ function Comments({ postType }) {
     };
 
     const deleteComment = (commentId) => {
-        const isOkayToDelete = window.confirm('Are you sure you want to delete?');
+        const isOkayToDelete = window.confirm('Are you sure you want to delete the comment?');
         if (isOkayToDelete) {
             // delete from database
             const deleteCommentStart = async () => {

@@ -70,14 +70,9 @@ function Comment({
             <CommentContainer>
                 {!isEditing &&
                     <div>
-                        created by : {comment?.show_name_as}
-                        <br />
                         body : {comment.body}
                         <br />
-                        parentId : {comment.parent_id}
-                        <br />
-                        commentId : {comment.id}
-                        <br />
+                        created by : {comment?.show_name_as}
                     </div>
                 }
                 {isEditing && (
@@ -94,7 +89,6 @@ function Comment({
                     className='comment-btn-container'
                 >
                     <div>
-
                         <LikeBtn
                             className={(isLiked) ? 'liked' : ''}
                             aria-disabled={isUpdatingLikes}

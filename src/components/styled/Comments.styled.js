@@ -16,6 +16,7 @@ const CommentContainer = styled.div`
     }
 
     & .reply-btn-span {
+        margin-inline: var(--post-card-margin);
         cursor: pointer;
     }
 `

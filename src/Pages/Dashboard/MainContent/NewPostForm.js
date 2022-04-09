@@ -11,6 +11,7 @@ import { resetDropdown } from '../../../features/classDropdownToggle/classDropdo
 import { TextBox } from '../../../components/styled/TextBox';
 import { v4 as uuidV4 } from 'uuid';
 import { InputField } from '../../../components/styled/InputField';
+import { FieldLabel } from '../../../components/styled/FieldLabel';
 
 function NewPostForm() {
     const dispatch = useDispatch();
@@ -144,11 +145,10 @@ function NewPostForm() {
     }
     return (
         <>
-            <div>NewPostForm</div>
             <div className='newpost_form_wrapper'>
                 <form onSubmit={handleSubmit}>
                     <div>
-                        <p>Post type : </p>
+                        <FieldLabel>Post type : </FieldLabel>
                         <input type="radio" id="question"
                             name="type"
                             value="question"
@@ -167,7 +167,7 @@ function NewPostForm() {
                         <label htmlFor="note">Note</label>
                     </div>
                     <div>
-                        <p>Select Discussion : </p>
+                        <FieldLabel>Select Discussion : </FieldLabel>
                         <Select
                             components={makeAnimated()}
                             options={discussions}
@@ -179,8 +179,9 @@ function NewPostForm() {
                         />
                     </div>
                     <div>
-                        <p>Summary : </p>
+                        <FieldLabel htmlFor='new-post__summary'>Summary : </FieldLabel>
                         <InputField
+                            id='new-post__summary'
                             type="text"
                             placeholder="Enter the summary here"
                             name="summary"
@@ -189,8 +190,9 @@ function NewPostForm() {
                         />
                     </div>
                     <div>
-                        <p>Details : </p>
+                        <FieldLabel htmlFor='new-post__details'>Details : </FieldLabel>
                         <TextBox
+                            id='new-post__details'
                             cols="30"
                             rows="10"
                             placeholder="Enter the details here"
@@ -201,7 +203,7 @@ function NewPostForm() {
                         </TextBox>
                     </div>
                     <div>
-                        <p>Show my name as : </p>
+                        <FieldLabel>Show my name as : </FieldLabel>
                         <Select
                             options={nameOptions}
                             onChange={setShowName}

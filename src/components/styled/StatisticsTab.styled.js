@@ -8,6 +8,18 @@ const StyledStatsCard = styled.div`
     gap: var(--post-card-margin);
 `
 
+const MyStats = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--post-card-margin) / 2);
+`
+const StatItem = styled.div`
+    display: flex;
+    justify-content: space-between;
+`
+
 export {
-    StyledStatsCard
+    StyledStatsCard,
+    MyStats,
+    StatItem
 };

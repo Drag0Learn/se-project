@@ -9,6 +9,7 @@ import { resetDropdown } from '../../../features/classDropdownToggle/classDropdo
 import { useNavigate } from 'react-router-dom';
 import { TextBox } from '../../../components/styled/TextBox';
 import { InputField } from '../../../components/styled/InputField';
+import { FieldLabel } from '../../../components/styled/FieldLabel';
 
 function CreateClass() {
     const user = useSelector(selectUser);
@@ -132,12 +133,12 @@ function CreateClass() {
 
     return (
         <>
-            <div>CreateClass</div>
             <div className="create_class_form_wrapper">
                 <form onSubmit={handleSubmit}>
                     <div>
-                        <p>Class Name :</p>
+                        <FieldLabel htmlFor='create-class__c-name'>Class Name :</FieldLabel>
                         <InputField
+                            id='create-class__c-name'
                             type="text"
                             name='c_name'
                             value={c_name}
@@ -146,8 +147,9 @@ function CreateClass() {
                         />
                     </div>
                     <div>
-                        <p>Class Number :</p>
+                        <FieldLabel htmlFor='create-class__c-num'>Class Number :</FieldLabel>
                         <InputField
+                            id='create-class__c-num'
                             type="text"
                             name='c_num'
                             value={c_num}
@@ -156,8 +158,9 @@ function CreateClass() {
                         />
                     </div>
                     <div>
-                        <p>Class Size :</p>
+                        <FieldLabel htmlFor='create-class__c-size'>Class Size :</FieldLabel>
                         <InputField
+                            id='create-class__c-size'
                             type="number"
                             min="0"
                             name='c_size'
@@ -167,8 +170,9 @@ function CreateClass() {
                         />
                     </div>
                     <div>
-                        <p>Class Term :</p>
+                        <FieldLabel htmlFor='create-class__c-term'>Class Term :</FieldLabel>
                         <InputField
+                            id='create-class__c-term'
                             type="text"
                             name='c_term'
                             value={c_term}
@@ -177,8 +181,9 @@ function CreateClass() {
                         />
                     </div>
                     <div>
-                        <p>Access Code (optional) :</p>
+                        <FieldLabel htmlFor='create-class__access-code'>Access Code (optional) :</FieldLabel>
                         <InputField
+                            id='create-class__access-code'
                             type="text"
                             name='access_code'
                             value={access_code}
@@ -186,7 +191,7 @@ function CreateClass() {
                         />
                     </div>
                     <div>
-                        Class Anonymity :
+                        <FieldLabel>Class Anonymity :</FieldLabel>
                         <div>
                             <label htmlFor="anonymity-true">
                                 <input
@@ -215,8 +220,9 @@ function CreateClass() {
                         </div>
                     </div>
                     <div>
-                        <p>Attendance list :</p>
+                        <FieldLabel htmlFor='create-class__attendance-list'>Attendance list :</FieldLabel>
                         <TextBox
+                            id='create-class__attendance-list'
                             cols="30"
                             rows="10"
                             placeholder="(please write emails of class participants on new line)"

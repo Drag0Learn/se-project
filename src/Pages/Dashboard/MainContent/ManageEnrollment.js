@@ -7,6 +7,7 @@ import { selectUser } from '../../../features/user/userSlice';
 import { TextBox } from '../../../components/styled/TextBox';
 import { MinusIcon } from '../../../components/styled/MinusIcon';
 import styled from 'styled-components';
+import { FieldLabel } from '../../../components/styled/FieldLabel';
 
 function ManageEnrollment() {
     const user = useSelector(selectUser);
@@ -82,11 +83,12 @@ function ManageEnrollment() {
 
     return (
         <div>
-            ENROLL STUDENTS :
+            <FieldLabel htmlFor='enroll-students-textbox'>ENROLL STUDENTS :</FieldLabel>
             <div>
                 <form onSubmit={handleSubmit}>
 
                     <TextBox
+                        id='enroll-students-textbox'
                         cols="30"
                         rows="10"
                         placeholder="(please write emails of class participants on new line)"
@@ -97,8 +99,8 @@ function ManageEnrollment() {
                     <button disabled={isLoading} type="submit">Enroll</button>
                 </form>
             </div>
-            JOINED USERS :
-            <div>
+            <EnrollmentListContainer>
+                <FieldLabel>JOINED USERS :</FieldLabel>
                 {joinedUsersList.map((joinedUser) => (
                     <EnrollmentList key={joinedUser}>
                         <div>{joinedUser}</div>
@@ -114,10 +116,22 @@ function ManageEnrollment() {
                         </MinusIcon>
                     </EnrollmentList>
                 ))}
-            </div>
+            </EnrollmentListContainer>
         </div>
     );
 }
+
+const EnrollmentListContainer = styled.div`
+    margin-top: var(--post-card-margin);
+    display: flex;
+    flex-direction: column;
+    /* margin-top: var(--post-card-margin); */
+    gap: var(--post-card-margin);
+
+    & > label {
+        margin-bottom: 0;
+    }
+`
 
 const EnrollmentList = styled.div`
     display: flex;
