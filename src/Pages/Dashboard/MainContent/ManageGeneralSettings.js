@@ -10,6 +10,7 @@ import { deleteObject, ref } from 'firebase/storage';
 import { selectAllPosts } from '../../../features/posts/postSlice';
 import { InputField } from '../../../components/styled/InputField';
 import { FieldLabel } from '../../../components/styled/FieldLabel';
+import { DashboardFormButton } from '../../../components/styled/DashboardFormButton.styled';
 
 function ManageGeneralSettings() {
     const navigate = useNavigate();
@@ -190,17 +191,25 @@ function ManageGeneralSettings() {
                         onChange={onChange}
                     />
                 </div>
-                <button disabled={isLoading} type="submit">Update</button>
+                <DashboardFormButton disabled={isLoading} type="submit">Update</DashboardFormButton>
             </StyledGeneralSettingsForm>
-            <button type='button' onClick={handleDelete}>Delete Class!</button>
+            <p>Or do you want to delete the class?</p>
+            <DashboardFormButton type='button' onClick={handleDelete}>Delete Class!</DashboardFormButton>
         </StyledGeneralSettingsContainer>
     );
 }
 
 const StyledGeneralSettingsContainer = styled.div`
+    & > p {
+        margin: calc(var(--post-card-margin) / 2);
+        font-weight: var(--fw-highlight);
+    }
 `
 
 const StyledGeneralSettingsForm = styled.form`
+    & > button:last-child {
+        margin-bottom: var(--post-card-margin);
+    }
     
 `
 

@@ -8,6 +8,7 @@ import { TextBox } from '../../../components/styled/TextBox';
 import { MinusIcon } from '../../../components/styled/MinusIcon';
 import styled from 'styled-components';
 import { FieldLabel } from '../../../components/styled/FieldLabel';
+import { DashboardFormButton } from '../../../components/styled/DashboardFormButton.styled';
 
 function ManageEnrollment() {
     const user = useSelector(selectUser);
@@ -96,7 +97,7 @@ function ManageEnrollment() {
                         value={attendanceList}
                         onChange={(e) => { setAttendanceList(e.target.value) }}
                     />
-                    <button disabled={isLoading} type="submit">Enroll</button>
+                    <DashboardFormButton disabled={isLoading} type="submit">Enroll</DashboardFormButton>
                 </form>
             </div>
             <EnrollmentListContainer>
@@ -127,7 +128,7 @@ const EnrollmentListContainer = styled.div`
     flex-direction: column;
     /* margin-top: var(--post-card-margin); */
     gap: var(--post-card-margin);
-
+    
     & > label {
         margin-bottom: 0;
     }
@@ -136,6 +137,7 @@ const EnrollmentListContainer = styled.div`
 const EnrollmentList = styled.div`
     display: flex;
     justify-content: space-between;
+    margin-left: calc(var(--post-card-margin) / 2);
 `
 
 export default ManageEnrollment;

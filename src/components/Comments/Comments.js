@@ -216,7 +216,7 @@ function Comments({ postType }) {
             <h4>Comments</h4>
             <CommentForm
                 postType={postType}
-                submitLabel={"COMMENT"}
+                submitLabel={"Comment"}
                 handleSubmit={(showName, text) => addComment(showName, text)}
             />
             {

@@ -6,6 +6,7 @@ import { selectCurrentClass } from '../../../features/classes/classSlice';
 import { selectAllPosts } from '../../../features/posts/postSlice';
 import { getDocRefById } from '../../../firebase/firebase-firestore';
 import { InputField } from '../../../components/styled/InputField';
+import { DashboardFormButton } from '../../../components/styled/DashboardFormButton.styled';
 import styled from 'styled-components';
 
 function ManageDiscussions() {
@@ -132,7 +133,7 @@ function ManageDiscussions() {
                     onChange={(e) => setNewDiscussion(e.target.value)}
                     onFocus={() => { resetEdit() }}
                 />
-                <button disabled={isCreating} type="submit">Create Discussion</button>
+                <DashboardFormButton disabled={isCreating} type="submit">Create Discussion</DashboardFormButton>
             </form>
             <DiscussionListContainerManage>
 
@@ -161,6 +162,7 @@ function ManageDiscussions() {
 }
 
 const DiscussionListContainerManage = styled.div`
+    margin-left: calc(var(--post-card-margin) / 2);
     margin-top: var(--post-card-margin);
     display: flex;
     flex-direction: column;

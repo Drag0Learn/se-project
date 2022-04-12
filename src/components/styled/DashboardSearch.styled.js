@@ -100,8 +100,14 @@ const AddPostButton = styled.button`
     overflow: hidden;
     text-overflow: ellipsis;
 
-    &:hover {
+    &:disabled {
+        background-color: var(--gray-color);
+        color: var(--black-color);
+    }
+
+    &:not(:disabled)&:hover {
         background-color: var(--dark-secondary-color);
+        color: var(--white-color);
     }
 `
 

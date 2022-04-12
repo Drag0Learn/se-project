@@ -12,6 +12,7 @@ import { TextBox } from '../../../components/styled/TextBox';
 import { v4 as uuidV4 } from 'uuid';
 import { InputField } from '../../../components/styled/InputField';
 import { FieldLabel } from '../../../components/styled/FieldLabel';
+import { DashboardFormButton } from '../../../components/styled/DashboardFormButton.styled';
 
 function NewPostForm() {
     const dispatch = useDispatch();
@@ -210,7 +211,7 @@ function NewPostForm() {
                             placeholder='Please select show name(s)'
                         />
                     </div>
-                    <button disabled={isLoading} type="submit">Submit</button>
+                    <DashboardFormButton className='mg-top-btn' disabled={isLoading} type="submit">Create Post!</DashboardFormButton>
                 </form>
             </div>
         </>

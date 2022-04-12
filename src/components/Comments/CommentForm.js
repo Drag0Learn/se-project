@@ -4,6 +4,7 @@ import Select from 'react-select';
 import { selectCurrentClass } from '../../features/classes/classSlice';
 import { selectUser } from '../../features/user/userSlice';
 import { TextBox } from '../styled/TextBox';
+import { DashboardFormButton } from '../styled/DashboardFormButton.styled';
 
 function CommentForm({ postType, submitLabel, handleSubmit, hasCancelButton = false, initialText = '', handleCancel }) {
     const [text, setText] = useState(initialText);
@@ -38,14 +39,15 @@ function CommentForm({ postType, submitLabel, handleSubmit, hasCancelButton = fa
             placeholder='Please select show name(s)'
             isClearable
         />
-        <button disabled={isTextareaDisabled}>{submitLabel}</button>
+        <DashboardFormButton className='mg-top-btn' disabled={isTextareaDisabled}>{submitLabel}</DashboardFormButton>
         {hasCancelButton && (
-            <button
+            <DashboardFormButton
                 type="button"
+                className='mg-left-btn'
                 onClick={handleCancel}
             >
                 Cancel
-            </button>
+            </DashboardFormButton>
         )}
     </form>;
 }

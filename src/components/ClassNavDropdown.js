@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { resetDropdown } from '../features/classDropdownToggle/classDropdownToggleSlice';
-import { selectJoinedClasses, updateCurrentClass } from '../features/classes/classSlice';
+import { selectCurrentClass, selectJoinedClasses, updateCurrentClass } from '../features/classes/classSlice';
 import { hideMoreMenu } from '../features/sidebar/sidebarSlice';
 import { ClassNavDropdownContainer, DropdownItem } from './styled/Navbar.styled';
 
 
 function ClassNavDropdown({ className }) {
     const joinedClasses = useSelector(selectJoinedClasses);
+    const currentClass = useSelector(selectCurrentClass);
     const dispatch = useDispatch();
 
     const handleClick = (cls) => {
@@ -25,7 +26,7 @@ function ClassNavDropdown({ className }) {
                     ? joinedClasses.map((cls) => (
                         <DropdownItem key={cls.c_id}>
                             <Link
-                                className='dropdown-item'
+                                className={currentClass === cls ? 'active-class dropdown-item' : 'dropdown-item'}
                                 onClick={() => { handleClick(cls) }} to={`/dashboard/${cls.c_id}`}
                             >
                                 {cls.c_num}

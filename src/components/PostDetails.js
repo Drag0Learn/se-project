@@ -16,6 +16,7 @@ import { DeleteIcon } from './styled/DeleteIcon';
 import { EditIcon } from './styled/EditIcon';
 import { InputField } from '../components/styled/InputField';
 import { FieldLabel } from '../components/styled/FieldLabel';
+import { DashboardFormButton } from '../components/styled/DashboardFormButton.styled';
 
 function PostDetails() {
 
@@ -332,13 +333,14 @@ function PostDetails() {
                                         !isInstructor && showSaveBtn
                                         &&
                                         <>
-                                            <button disabled={updatingStudAns} type='submit'>Save</button>
-                                            <button
+                                            <DashboardFormButton disabled={updatingStudAns} type='submit'>Save</DashboardFormButton>
+                                            <DashboardFormButton
+                                                className='mg-left-btn'
                                                 onClick={() => {
                                                     setStudAns(post?.student_ans);
                                                     setShowSaveBtn(false);
                                                 }}
-                                            >Cancel</button>
+                                            >Cancel</DashboardFormButton>
                                         </>
                                     }
                                 </form>
@@ -360,13 +362,14 @@ function PostDetails() {
                                         isInstructor && showSaveBtn
                                         &&
                                         <>
-                                            <button disabled={updatingInstructorAns} type='submit'>Save</button>
-                                            <button
+                                            <DashboardFormButton disabled={updatingInstructorAns} type='submit'>Save</DashboardFormButton>
+                                            <DashboardFormButton
+                                                className='mg-left-btn'
                                                 onClick={() => {
                                                     setInstructorAns(post?.instructor_ans);
                                                     setShowSaveBtn(false);
                                                 }}
-                                            >Cancel</button>
+                                            >Cancel</DashboardFormButton>
                                         </>
                                     }
                                 </form>
@@ -448,8 +451,10 @@ function PostDetails() {
                                 placeholder='Please select show name(s)'
                             />
                         </div>
-                        <button disabled={isLoading} type="submit">Save</button>
-                        <button
+                        <DashboardFormButton className='mg-top-btn' disabled={isLoading} type="submit">Save</DashboardFormButton>
+                        <DashboardFormButton
+                            className='mg-top-btn'
+                            className='mg-left-btn'
                             type='button'
                             onClick={() => {
                                 setDiscussionList(initialFormDiscussionList);
@@ -459,7 +464,7 @@ function PostDetails() {
                             }}
                         >
                             Cancel
-                        </button>
+                        </DashboardFormButton>
                     </form>
                 </div>
 

@@ -14,10 +14,38 @@ function ManageClassTab() {
     return (
         <ManageClassContainer>
             <ManageClassNav>
-                <li onClick={() => { dispatch(toggleManageClass('general')) }}>General</li>
-                <li onClick={() => { dispatch(toggleManageClass('QnA')) }}>QnA</li>
-                <li onClick={() => { dispatch(toggleManageClass('discussions')) }}>Discussions</li>
-                <li onClick={() => { dispatch(toggleManageClass('enrollment')) }}>Enrollment</li>
+                <li
+                    className={manageClassToggle === 'general' ? 'active-manage-tab' : ''}
+                    onClick={() => {
+                        dispatch(toggleManageClass('general'));
+                    }}
+                >
+                    General
+                </li>
+                <li
+                    className={manageClassToggle === 'QnA' ? 'active-manage-tab' : ''}
+                    onClick={() => {
+                        dispatch(toggleManageClass('QnA'));
+                    }}
+                >
+                    QnA
+                </li>
+                <li
+                    className={manageClassToggle === 'discussions' ? 'active-manage-tab' : ''}
+                    onClick={() => {
+                        dispatch(toggleManageClass('discussions'));
+                    }}
+                >
+                    Discussions
+                </li>
+                <li
+                    className={manageClassToggle === 'enrollment' ? 'active-manage-tab' : ''}
+                    onClick={() => {
+                        dispatch(toggleManageClass('enrollment'));
+                    }}
+                >
+                    Enrollment
+                </li>
             </ManageClassNav>
 
             {manageClassToggle === 'general' && <ManageGeneralSettings />}
@@ -47,6 +75,16 @@ const ManageClassNav = styled.ul`
         margin-right: calc(var(--post-card-margin) * 2);
         font-weight: var(--fw-bold);
         cursor: pointer;
+    }
+
+    & .active-manage-tab {
+        /* border: 2px solid green; */
+        margin-top: calc(var(--post-card-margin) / 2);
+        /* margin-left: calc(var(--post-card-margin) / 2); */
+        margin-right: calc(var(--post-card-margin) * 2);
+        font-weight: var(--fw-bold);
+        cursor: pointer;
+        border-bottom: 1px solid var(--secondary-color);
     }
 `
 

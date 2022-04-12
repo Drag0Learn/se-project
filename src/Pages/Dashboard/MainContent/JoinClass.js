@@ -10,6 +10,7 @@ import { resetDropdown } from '../../../features/classDropdownToggle/classDropdo
 import { useNavigate } from 'react-router-dom';
 import { InputField } from '../../../components/styled/InputField';
 import { FieldLabel } from '../../../components/styled/FieldLabel';
+import { DashboardFormButton } from '../../../components/styled/DashboardFormButton.styled';
 
 function JoinClass() {
     const [formData, setFormData] = useState({
@@ -243,7 +244,7 @@ function JoinClass() {
                             />
                         </div>
                     } */}
-                    <button disabled={isSubmitting} type="submit">Join Class!</button>
+                    <DashboardFormButton disabled={isSubmitting} type="submit">Join Class!</DashboardFormButton>
                 </form>
             </div>
         </>

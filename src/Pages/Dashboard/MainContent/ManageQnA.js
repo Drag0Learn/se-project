@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { selectCurrentClass } from '../../../features/classes/classSlice';
 import { getDocRefById } from '../../../firebase/firebase-firestore';
 import { FieldLabel } from '../../../components/styled/FieldLabel';
+import { DashboardFormButton } from '../../../components/styled/DashboardFormButton.styled';
 
 function ManageQnA() {
     const currentClass = useSelector(selectCurrentClass);
@@ -61,7 +62,7 @@ function ManageQnA() {
                         FALSE
                     </label>
                 </div>
-                <button type='submit'>Save</button>
+                <DashboardFormButton className='mg-top-btn' type='submit'>Save</DashboardFormButton>
             </form>
         </div>
     );

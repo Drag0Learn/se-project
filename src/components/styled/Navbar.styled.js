@@ -190,6 +190,14 @@ const DropdownItem = styled.div`
         text-decoration: none;
     }
 
+    & .dropdown-item.active-class {
+        border-bottom: 1px solid var(--secondary-color);
+    }
+
+    & .dropdown-item:hover {
+        border-bottom: 1px solid var(--secondary-color);
+    }
+
     & .dropdown-item:visited {
         decoration: none;
         color: var(--black-color);

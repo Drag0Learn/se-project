@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { TextBox } from '../../../components/styled/TextBox';
 import { InputField } from '../../../components/styled/InputField';
 import { FieldLabel } from '../../../components/styled/FieldLabel';
+import { DashboardFormButton } from '../../../components/styled/DashboardFormButton.styled';
 
 function CreateClass() {
     const user = useSelector(selectUser);
@@ -231,7 +232,7 @@ function CreateClass() {
                             onChange={(e) => { setAttendanceList(e.target.value) }}
                         />
                     </div>
-                    <button disabled={isLoading} type="submit">Create Class!</button>
+                    <DashboardFormButton disabled={isLoading} type="submit">Create Class!</DashboardFormButton>
                 </form>
             </div>
         </>
