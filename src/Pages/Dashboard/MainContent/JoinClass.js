@@ -199,6 +199,7 @@ function JoinClass() {
                             name='c_name'
                             value={c_name}
                             onChange={onChange}
+                            required
                         />
                     </div>
                     <div>
@@ -209,6 +210,7 @@ function JoinClass() {
                             name='c_num'
                             value={c_num}
                             onChange={onChange}
+                            required
                         />
                     </div>
                     <div>
@@ -219,6 +221,7 @@ function JoinClass() {
                             name='c_term'
                             value={c_term}
                             onChange={onChange}
+                            required
                         />
                     </div>
                     <div>

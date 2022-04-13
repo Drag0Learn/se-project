@@ -255,10 +255,10 @@ function PostDetails() {
                 <>
                     <PostDetailsContainer>
                         <PostBox>
-                            <strong className='post__summary'>{post?.summary}</strong>
-                            <br />
-                            <div className='post__details'>{post?.details}</div>
-                            <br />
+                            <div className='post__content'>
+                                <div className='post__summary'>{post?.summary}</div>
+                                <div className='post__details'>{post?.details}</div>
+                            </div>
                             <div
                                 className='post-btn-container'
                             >

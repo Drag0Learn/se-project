@@ -96,6 +96,7 @@ function ManageEnrollment() {
                         name="attendanceList"
                         value={attendanceList}
                         onChange={(e) => { setAttendanceList(e.target.value) }}
+                        required
                     />
                     <DashboardFormButton disabled={isLoading} type="submit">Enroll</DashboardFormButton>
                 </form>

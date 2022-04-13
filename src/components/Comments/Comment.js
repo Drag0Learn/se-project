@@ -69,10 +69,10 @@ function Comment({
         <>
             <CommentContainer>
                 {!isEditing &&
-                    <div>
-                        body : {comment.body}
+                    <div className='comment__container'>
+                        <p className='comment__created-by'>created by : {comment?.show_name_as}</p>
                         <br />
-                        created by : {comment?.show_name_as}
+                        <p className='comment__body'>body : {comment.body}</p>
                     </div>
                 }
                 {isEditing && (

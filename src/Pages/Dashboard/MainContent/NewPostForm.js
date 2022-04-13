@@ -154,6 +154,7 @@ function NewPostForm() {
                             name="type"
                             value="question"
                             onChange={onChange}
+                            required
                         />
                         <label htmlFor="question">Question</label>
 
@@ -164,6 +165,7 @@ function NewPostForm() {
                             name="type"
                             value="note"
                             onChange={onChange}
+                            required
                         />
                         <label htmlFor="note">Note</label>
                     </div>
@@ -188,6 +190,7 @@ function NewPostForm() {
                             name="summary"
                             value={summary}
                             onChange={onChange}
+                            required
                         />
                     </div>
                     <div>
@@ -200,6 +203,7 @@ function NewPostForm() {
                             name="details"
                             value={details}
                             onChange={onChange}
+                            required
                         >
                         </TextBox>
                     </div>
@@ -209,6 +213,7 @@ function NewPostForm() {
                             options={nameOptions}
                             onChange={setShowName}
                             placeholder='Please select show name(s)'
+                            required
                         />
                     </div>
                     <DashboardFormButton className='mg-top-btn' disabled={isLoading} type="submit">Create Post!</DashboardFormButton>

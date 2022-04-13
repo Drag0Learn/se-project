@@ -132,6 +132,7 @@ function ManageDiscussions() {
                     value={newDiscussion}
                     onChange={(e) => setNewDiscussion(e.target.value)}
                     onFocus={() => { resetEdit() }}
+                    required
                 />
                 <DashboardFormButton disabled={isCreating} type="submit">Create Discussion</DashboardFormButton>
             </form>
