@@ -42,7 +42,11 @@ function Login() {
     useEffect(() => {
         if (JSON.stringify(formErrors) === '{}') {
             if (isValidationComplete) {
-                dispatch(login(formData));
+                const userData = {
+                    email: email.toLowerCase(),
+                    password
+                };
+                dispatch(login(userData));
             }
         } else {
             setIsValidationComplete(false);

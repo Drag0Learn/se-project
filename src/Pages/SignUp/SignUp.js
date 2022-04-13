@@ -144,9 +144,10 @@ function SignUp() {
                     uni_id: univ[0].id,
                     role,
                     username,
-                    email,
+                    email: email.toLowerCase(),
                     password
                 };
+                // console.log(userData);
                 dispatch(signup(userData));
             }
         } else {
@@ -203,6 +204,7 @@ function SignUp() {
     const onSubmit = async (e) => {
         e.preventDefault();
         // validate the form here
+
         setFormErrors(validate(formData));
 
         // now just create new user and store them in firebase
