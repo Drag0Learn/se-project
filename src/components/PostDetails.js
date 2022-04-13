@@ -427,6 +427,7 @@ function PostDetails() {
                                 name="summary"
                                 value={summary}
                                 onChange={onChange}
+                                required
                             />
                         </div>
                         <div>
@@ -439,6 +440,7 @@ function PostDetails() {
                                 name="details"
                                 value={details}
                                 onChange={onChange}
+                                required
                             >
                             </TextBox>
                         </div>
