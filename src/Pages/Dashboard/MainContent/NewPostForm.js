@@ -13,6 +13,7 @@ import { v4 as uuidV4 } from 'uuid';
 import { InputField } from '../../../components/styled/InputField';
 import { FieldLabel } from '../../../components/styled/FieldLabel';
 import { DashboardFormButton } from '../../../components/styled/DashboardFormButton.styled';
+import { toast } from 'react-toastify';
 
 function NewPostForm() {
     const dispatch = useDispatch();
@@ -128,6 +129,19 @@ function NewPostForm() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        if (showName.length === 0) {
+            toast(`Please select a display name`, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+            return;
+        }
+
         // do some validation
         setIsLoading(true);
         const finalDiscussions = discussionList?.map(discussion => discussion.value);
@@ -213,7 +227,6 @@ function NewPostForm() {
                             options={nameOptions}
                             onChange={setShowName}
                             placeholder='Please select show name(s)'
-                            required
                         />
                     </div>
                     <DashboardFormButton className='mg-top-btn' disabled={isLoading} type="submit">Create Post!</DashboardFormButton>

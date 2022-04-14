@@ -58,6 +58,25 @@ const StyledPostCard = styled.div`
         background-color: var(--secondary-color);
         z-index: 99999;
     }
+
+    & .icon-div {
+        position: absolute;
+        top: calc(var(--post-card-padding) / 2);
+        /* right: 0; */
+        right: calc(var(--post-card-padding) / 2);
+        bottom: calc(var(--post-card-padding) / 2);
+        display: flex;
+        flex-direction: column;
+        gap: calc(var(--post-card-padding) / 2);
+    }
+
+    & .exclamation-icon {
+        /* position: absolute;
+        right: calc(var(--post-card-padding) / 2); */
+        min-width: 1em;
+        min-height: 1em;
+        fill: red;
+    }
 `
 
 export { PostListContainer, StyledPostCard };
