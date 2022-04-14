@@ -182,6 +182,9 @@ function SignUp() {
     const validate = (data) => {
         const errors = {};
         const regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i;
+        const univ = allUniList.filter((uni) => university === uni.name);
+        const checkUniStr = `@${univ[0].domain_name}$`;
+        const checkUniRegex = new RegExp(checkUniStr);
 
         if (!data.username) {
             errors.username = 'Username is required';
@@ -190,6 +193,9 @@ function SignUp() {
             errors.email = 'Email is required';
         } else if (!regex.test(data.email)) {
             errors.email = 'Email is invalid. Enter e.g test@test.com';
+        } else if (!checkUniRegex.test(data.email)) {
+            // check email with university domain name
+            errors.email = 'Email should belong to the same university';
         }
         if (!data.password) {
             errors.password = 'Password is required';

@@ -61,24 +61,40 @@ function ManageEnrollment() {
             setIsLoading(false);
             return;
         }
-        // no email in attendance list is present in current class joined user list
-        if (test.every((email) => !joinedUsersList.includes(email))) {
-            const newJoinedUsers = [...joinedUsersList, ...test];
-            console.log('new joined users are : ', newJoinedUsers);
 
-            const classDocRef = getDocRefById(currentClass.c_id, 'classes');
-            updateDoc(classDocRef, {
-                joined_users: [...newJoinedUsers]
+        // check domain names for emails
+        const userEmailSplit = user.email.split('@');
+        const userDomainName = userEmailSplit[userEmailSplit.length - 1];
+        if (
+            test.every((email) => {
+                const emailSplit = email.split('@');
+
+                const domainName = emailSplit[emailSplit.length - 1];
+                return domainName === userDomainName;
             })
-                .then(() => {
-                    console.log('updated attendance list successfully.');
-                    setAttendanceList('');
-                    setIsLoading(false);
+        ) {
+            if (test.every((email) => !joinedUsersList.includes(email))) {
+                // no email in attendance list is present in current class joined user list
+                const newJoinedUsers = [...joinedUsersList, ...test];
+                console.log('new joined users are : ', newJoinedUsers);
+                const classDocRef = getDocRefById(currentClass.c_id, 'classes');
+                updateDoc(classDocRef, {
+                    joined_users: [...newJoinedUsers]
                 })
-                .catch(err => {
-                    console.log(err.message);
-                    setIsLoading(false);
-                })
+                    .then(() => {
+                        console.log('updated attendance list successfully.');
+                        setAttendanceList('');
+                        setIsLoading(false);
+                    })
+                    .catch(err => {
+                        console.log(err.message);
+                        setIsLoading(false);
+                    })
+            }
+        } else {
+            alert('You can only enroll users from your University.');
+            setIsLoading(false);
+            return;
         }
     }
 
