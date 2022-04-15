@@ -7,6 +7,7 @@ const StyledStatsCard = styled.div`
     align-items: center;
     margin: var(--post-card-margin);
     gap: var(--post-card-margin);
+    
 `
 
 const MyStats = styled.div`
