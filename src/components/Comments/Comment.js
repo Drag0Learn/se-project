@@ -32,6 +32,7 @@ function Comment({
     const isReplying = activeComment && activeComment.type === 'replying' && activeComment.id === comment.id;
     const isEditing = activeComment && activeComment.type === 'editing' && activeComment.id === comment.id;
     const replyId = parentId ? parentId : comment.id;
+    const [showReplies, setShowReplies] = useState(false);
 
     const isLikedByMe = comment.liked_by.includes(user.email);
     const [isLiked, setIsLiked] = useState(isLikedByMe);
@@ -159,33 +160,75 @@ function Comment({
                         }
                     </div>
                 </div>
-            </CommentContainer>
-            {isReplying && (
-                <CommentForm
-                    hasCancelButton
-                    handleCancel={() => setActiveComment(null)}
-                    submitLabel={'Reply'}
-                    handleSubmit={(showName, text) => addComment(showName, text, replyId)}
-                />
-            )}
-            {replies.length > 0 && (
-                <div>
-                    {replies.map(reply => (
-                        <Comment
-                            key={reply.id}
-                            comment={reply}
-                            postType={postType}
-                            replies={[]}
-                            addComment={addComment}
-                            deleteComment={deleteComment}
-                            updateComment={updateComment}
-                            parentId={comment.id}
-                            activeComment={activeComment}
-                            setActiveComment={setActiveComment}
+                {isReplying && (
+                    <div className="reply-comment-form">
+                        <CommentForm
+                            hasCancelButton
+                            handleCancel={() => setActiveComment(null)}
+                            submitLabel={'Reply'}
+                            handleSubmit={(showName, text) => addComment(showName, text, replyId)}
                         />
-                    ))}
-                </div>
-            )}
+                    </div>
+                )}
+                {
+                    replies.length > 0
+                    &&
+                    <div
+                        className="view-replies-toggle"
+                        onClick={() => setShowReplies(!showReplies)}
+                    >
+                        {
+                            showReplies
+                                ? <>
+                                    <svg
+                                        className='arrow-icon'
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                        strokeWidth={2}
+                                    >
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+                                    </svg>
+                                    Hide Replies
+                                </>
+                                : <>
+                                    <svg
+                                        className='arrow-icon'
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                        strokeWidth={2}
+                                    >
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                    View Replies
+                                </>
+                        }
+                    </div>
+                }
+
+
+                {showReplies && replies.length > 0 && (
+                    <div className='comment__replies'>
+                        {replies.map(reply => (
+                            <Comment
+                                key={reply.id}
+                                comment={reply}
+                                postType={postType}
+                                replies={[]}
+                                addComment={addComment}
+                                deleteComment={deleteComment}
+                                updateComment={updateComment}
+                                parentId={comment.id}
+                                activeComment={activeComment}
+                                setActiveComment={setActiveComment}
+                            />
+                        ))}
+                    </div>
+                )}
+            </CommentContainer>
         </>
     );
 }

@@ -5,6 +5,7 @@ const StyledStatsCard = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: var(--post-card-margin);
     gap: var(--post-card-margin);
 `
 
